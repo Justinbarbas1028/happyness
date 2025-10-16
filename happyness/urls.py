@@ -19,6 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),  # login/logout
+    path('accounts/', include('allauth.urls')),  # django-allauth (login/logout/signup)
     path('', include('app.urls')),  # Home routes
 ]

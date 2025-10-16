@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Out - Happyness{% endblock %}
+
+{% block content %}
+<div class="min-h-[calc(100vh-200px)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <!-- Header -->
+    <div class="text-center">
+      <h2 class="text-3xl font-extrabold text-white">
+        Sign out
+      </h2>
+      <p class="mt-2 text-sm text-white/70">
+        Are you sure you want to sign out?
+      </p>
+    </div>
+
+    <!-- Logout Form -->
+    <div class="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-8">
+      <form method="post" action="{% url 'account_logout' %}" class="space-y-6">
+        {% csrf_token %}
+        
+        <div class="flex gap-3">
+          <button
+            type="submit"
+            class="flex-1 flex justify-center py-2.5 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition"
+          >
+            Yes, sign out
+          </button>
+          <a
+            href="/home/"
+            class="flex-1 flex justify-center items-center py-2.5 px-4 border border-white/20 text-sm font-semibold rounded-lg text-white bg-white/5 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/20 transition"
+          >
+            Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

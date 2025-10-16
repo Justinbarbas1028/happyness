@@ -15,4 +15,9 @@ urlpatterns = [
 
     # HTMX demo
     path('htmx/greeting/', views.htmx_greeting, name='htmx_greeting'),
+    
+    # HTMX validation endpoints
+    path('validate/username/', views.validate_username, name='validate_username'),
+    path('validate/email/', views.validate_email, name='validate_email'),
+    path('validate/field/', views.validate_field, name='validate_field'),
 ]
