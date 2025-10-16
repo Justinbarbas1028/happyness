@@ -1,25 +1,27 @@
-/* Basic, friendly styling */
+/* Basic, friendly styling (mapped to central theme variables) */
 :root {
-  --bg: #0b0f17;
-  --panel: #121826;
-  --text: #e6edf3;
-  --muted: #9fb2c8;
-  --brand: #7cacf8;
-  --accent: #8ef6d0;
-  --green: #39b54a;
+  /* Map legacy tokens to centralized theme system so they react to light/dark */
+  --bg: var(--bg-primary);
+  --panel: var(--bg-secondary);
+  --text: var(--text-primary);
+  --muted: var(--text-secondary);
+  --brand: var(--brand-primary);
+  --accent: var(--brand-accent);
+  --green: var(--button-primary);
 }
 
 * { box-sizing: border-box; }
 
-html, body {
-  height: 100%;
-}
+html, body { height: 100%; }
 
+/*
+  Do not override body background/color here. The centralized theme.css
+  controls background (including gradients) and text color via CSS variables.
+  Keeping this file theme-aware prevents dark-only overrides.
+*/
 body {
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  background: radial-gradient(1200px 800px at 10% 10%, #0d1322, var(--bg));
-  color: var(--text);
 }
 
 .container {

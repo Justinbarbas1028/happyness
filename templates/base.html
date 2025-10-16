@@ -20,34 +20,80 @@
         }
       }
     </script>
+    <!-- Theme System (must load first) -->
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
     <!-- Optional: legacy styles (background, minor tweaks) -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <!-- HTMX -->
     <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <!-- Theme initialization (prevent FOUC) -->
+    <script>
+      // Apply stored theme immediately to prevent flash
+      (function() {
+        const stored = localStorage.getItem('happyness-theme');
+        if (stored === 'dark') {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      })();
+    </script>
   </head>
-  <body>
-    <header class="border-b border-white/10 backdrop-blur bg-white/5">
-      <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-4">
-        <a href="/" class="flex items-center gap-2 font-semibold text-white no-underline">
+  <body hx-boost="true">
+  <header style="background-color: var(--header-bg); border-bottom: 1px solid var(--header-border);" class="backdrop-blur sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+        <a href="{% if user.is_authenticated %}{% url 'home' %}{% else %}{% url 'landing' %}{% endif %}" class="flex items-center gap-2 font-semibold no-underline" style="color: var(--text-primary);">
           <img src="{% static 'images/logo.svg' %}" alt="Logo" class="w-7 h-7" />
-          <span>HappyNess <span class="text-happy font-bold">Project</span></span>
+          <span>HappyNess <span class="font-bold" style="color: var(--brand-secondary);">Project</span></span>
         </a>
-        <nav class="mx-auto hidden md:flex items-center gap-6 text-sm">
+        <!-- Desktop nav -->
+        <nav class="hidden md:flex items-center gap-6 text-sm">
           {% if user.is_authenticated %}
-            <a href="/home/" class="text-white/70 hover:text-white">Home</a>
+            <a href="{% url 'home' %}" style="color: var(--text-secondary);" class="hover:opacity-80 transition">Home</a>
           {% else %}
-            <a href="/" class="text-white/70 hover:text-white">Home</a>
+            <a href="{% url 'landing' %}" style="color: var(--text-secondary);" class="hover:opacity-80 transition">Home</a>
           {% endif %}
-          <a href="/about/" class="text-white/70 hover:text-white">About</a>
-          <a href="/products/" class="text-white/70 hover:text-white">Products</a>
-          <a href="/faqs/" class="text-white/70 hover:text-white">FAQs</a>
+          <a href="{% url 'about' %}" style="color: var(--text-secondary);" class="hover:opacity-80 transition">About</a>
+          <a href="{% url 'products' %}" style="color: var(--text-secondary);" class="hover:opacity-80 transition">Products</a>
+          <a href="{% url 'faqs' %}" style="color: var(--text-secondary);" class="hover:opacity-80 transition">FAQs</a>
         </nav>
-        <div class="ml-auto">
+
+        <!-- Right actions -->
+        <div class="flex items-center gap-2">
           {% if user.is_authenticated %}
-            <button onclick="showLogoutModal()" class="inline-flex items-center rounded-md bg-happy text-white font-semibold px-4 py-2 hover:bg-happy/90 transition">Logout</button>
+            <button onclick="showLogoutModal()" class="hidden md:inline-flex btn btn-primary">Logout</button>
           {% else %}
-            <a href="/accounts/login/" class="inline-flex items-center rounded-md bg-happy text-white font-semibold px-4 py-2">Sign In</a>
+            <a href="/accounts/login/" class="hidden md:inline-flex btn btn-primary">Sign In</a>
           {% endif %}
+          <!-- Mobile hamburger -->
+    <button id="mobileMenuBtn" type="button" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg relative z-50 touch-manipulation cursor-pointer"
+                  aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation"
+                  style="background-color: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-primary);">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 pointer-events-none">
+              <path fill-rule="evenodd" d="M3.75 5.25a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75zm0 6a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75zm0 6a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobileMenu" class="md:hidden hidden border-t" style="border-color: var(--card-border); background-color: var(--bg-secondary);">
+        <div class="max-w-6xl mx-auto px-4 py-3 space-y-2">
+          <div class="grid grid-cols-1 gap-2 text-sm">
+            {% if user.is_authenticated %}
+              <a href="{% url 'home' %}" class="py-2 rounded-lg px-3 hover:opacity-90" style="color: var(--text-primary); background-color: var(--card-bg); border: 1px solid var(--card-border);">Home</a>
+            {% else %}
+              <a href="{% url 'landing' %}" class="py-2 rounded-lg px-3 hover:opacity-90" style="color: var(--text-primary); background-color: var(--card-bg); border: 1px solid var(--card-border);">Home</a>
+            {% endif %}
+            <a href="{% url 'about' %}" class="py-2 rounded-lg px-3 hover:opacity-90" style="color: var(--text-primary); background-color: var(--card-bg); border: 1px solid var(--card-border);">About</a>
+            <a href="{% url 'products' %}" class="py-2 rounded-lg px-3 hover:opacity-90" style="color: var(--text-primary); background-color: var(--card-bg); border: 1px solid var(--card-border);">Products</a>
+            <a href="{% url 'faqs' %}" class="py-2 rounded-lg px-3 hover:opacity-90" style="color: var(--text-primary); background-color: var(--card-bg); border: 1px solid var(--card-border);">FAQs</a>
+          </div>
+          <div class="pt-2">
+            {% if user.is_authenticated %}
+              <button onclick="showLogoutModal()" class="w-full btn btn-primary">Logout</button>
+            {% else %}
+              <a href="/accounts/login/" class="w-full inline-flex justify-center btn btn-primary">Sign In</a>
+            {% endif %}
+          </div>
         </div>
       </div>
     </header>
@@ -56,13 +102,24 @@
       {% block content %}{% endblock %}
     </main>
 
-    <footer class="max-w-6xl mx-auto px-4 py-6 text-white/60">
-      <small>&copy; <span id="year"></span> Happyness</small>
-    </footer>
+    <!-- Footer Partial -->
+    {% include 'partials/footer.html' %}
+
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+      <!-- Sun Icon (shown in dark mode) -->
+      <svg class="sun-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+      </svg>
+      <!-- Moon Icon (shown in light mode) -->
+      <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+      </svg>
+    </button>
 
     <!-- Logout Confirmation Modal -->
-    <div id="logoutModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div class="bg-[#1a1f2e] rounded-xl border border-white/10 max-w-md w-full p-6 shadow-2xl">
+    <div id="logoutModal" class="hidden fixed inset-0 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto" style="background-color: var(--overlay); z-index: 9999;">
+      <div class="rounded-xl max-w-md w-full p-6 shadow-2xl relative" style="background-color: var(--bg-secondary); border: 1px solid var(--card-border);">
         <div class="flex items-start gap-4">
           <div class="flex-shrink-0">
             <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,16 +127,16 @@
             </svg>
           </div>
           <div class="flex-1">
-            <h3 class="text-lg font-semibold text-white mb-2">Confirm Logout</h3>
-            <p class="text-white/70 text-sm mb-6">Are you sure you want to sign out? You'll need to log in again to access your account.</p>
+            <h3 class="text-lg font-semibold text-primary mb-2" style="color: var(--text-primary);">Confirm Logout</h3>
+            <p class="text-sm mb-6" style="color: var(--text-secondary);">Are you sure you want to sign out? You'll need to log in again to access your account.</p>
             <div class="flex gap-3">
-              <form action="/accounts/logout/" method="post" class="flex-1">
+              <form action="/accounts/logout/" method="post" class="flex-1" hx-boost="false">
                 {% csrf_token %}
                 <button type="submit" class="w-full py-2.5 px-4 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition focus:outline-none focus:ring-2 focus:ring-red-500">
                   Yes, logout
                 </button>
               </form>
-              <button onclick="hideLogoutModal()" class="flex-1 py-2.5 px-4 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg border border-white/20 transition focus:outline-none focus:ring-2 focus:ring-white/20">
+              <button onclick="hideLogoutModal()" class="flex-1 py-2.5 px-4 font-semibold rounded-lg transition focus:outline-none" style="background-color: var(--card-bg); color: var(--text-primary); border: 1px solid var(--card-border);">
                 Cancel
               </button>
             </div>
@@ -89,28 +146,44 @@
     </div>
 
     <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/theme.js' %}"></script>
     <script>
       function showLogoutModal() {
-        document.getElementById('logoutModal').classList.remove('hidden');
+        const modal = document.getElementById('logoutModal');
+        modal.classList.remove('hidden');
+        // Prevent body scroll but allow modal to be scrollable
         document.body.style.overflow = 'hidden';
+        document.body.style.paddingRight = '0px';
       }
       
       function hideLogoutModal() {
-        document.getElementById('logoutModal').classList.add('hidden');
-        document.body.style.overflow = 'auto';
+        const modal = document.getElementById('logoutModal');
+        modal.classList.add('hidden');
+        // Restore body scroll
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
       }
       
       // Close modal on Escape key
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-          hideLogoutModal();
+          const modal = document.getElementById('logoutModal');
+          if (modal && !modal.classList.contains('hidden')) {
+            hideLogoutModal();
+          }
         }
       });
       
       // Close modal on backdrop click
-      document.getElementById('logoutModal')?.addEventListener('click', function(e) {
-        if (e.target === this) {
-          hideLogoutModal();
+      document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('logoutModal');
+        if (modal) {
+          modal.addEventListener('click', function(e) {
+            // Only close if clicking directly on the backdrop (not the modal content)
+            if (e.target === modal) {
+              hideLogoutModal();
+            }
+          });
         }
       });
     </script>

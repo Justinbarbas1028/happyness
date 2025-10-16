@@ -9,17 +9,17 @@
   <div class="max-w-md w-full space-y-8">
     <!-- Header -->
     <div class="text-center">
-      <h2 class="text-3xl font-extrabold text-white">
+      <h2 class="text-3xl font-extrabold" style="color: var(--text-primary);">
         Create your account
       </h2>
-      <p class="mt-2 text-sm text-white/70">
+      <p class="mt-2 text-sm" style="color: var(--text-secondary);">
         Already have an account?
-        <a href="{% url 'account_login' %}" class="font-medium text-brand hover:text-brand/80 transition">
+        <a href="{% url 'account_login' %}" class="font-medium transition" style="color: var(--brand-secondary);">
           Sign in
         </a>
         {% if form.errors %}
         <span class="mx-2">•</span>
-        <a href="{% url 'account_signup' %}" class="font-medium text-happy hover:text-happy/80 transition">
+        <a href="{% url 'account_signup' %}" class="font-medium transition" style="color: var(--brand-secondary);">
           Start fresh
         </a>
         {% endif %}
@@ -27,7 +27,7 @@
     </div>
 
     <!-- Signup Form -->
-    <div class="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-8">
+  <div class="rounded-xl p-8" style="background-color: var(--card-bg); border: 1px solid var(--card-border); backdrop-filter: blur(10px);">
       <form 
         method="post" 
         action="{% url 'account_signup' %}"
@@ -55,7 +55,7 @@
         <div class="space-y-4">
           <!-- Email Field -->
           <div>
-            <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-white/90 mb-2">
+            <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium mb-2" style="color: var(--text-primary);">
               Email address
             </label>
             <input
@@ -64,7 +64,8 @@
               id="{{ form.email.id_for_label }}"
               value="{{ form.email.value|default:'' }}"
               required
-              class="appearance-none rounded-lg relative block w-full px-3 py-2.5 border border-white/10 bg-white/5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition"
+              class="appearance-none rounded-lg relative block w-full px-3 py-2.5 transition focus:outline-none focus:ring-2"
+              style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary);"
               placeholder="you@example.com"
               hx-post="{% url 'validate_email' %}"
               hx-trigger="blur changed delay:500ms"
@@ -72,7 +73,7 @@
               hx-swap="innerHTML"
               hx-include="[name='csrfmiddlewaretoken']"
             >
-            <div id="email-error" class="mt-2 text-sm text-red-400">
+            <div id="email-error" class="mt-2 text-sm" style="color: var(--error);">
               {% if form.email.errors %}
                 {{ form.email.errors.0 }}
               {% endif %}
@@ -81,7 +82,7 @@
 
           <!-- Username Field -->
           <div>
-            <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-white/90 mb-2">
+            <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium mb-2" style="color: var(--text-primary);">
               Username
             </label>
             <input
@@ -90,7 +91,8 @@
               id="{{ form.username.id_for_label }}"
               value="{{ form.username.value|default:'' }}"
               required
-              class="appearance-none rounded-lg relative block w-full px-3 py-2.5 border border-white/10 bg-white/5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition"
+              class="appearance-none rounded-lg relative block w-full px-3 py-2.5 transition focus:outline-none focus:ring-2"
+              style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary);"
               placeholder="Choose a username"
               hx-post="{% url 'validate_username' %}"
               hx-trigger="blur changed delay:500ms"
@@ -98,7 +100,7 @@
               hx-swap="innerHTML"
               hx-include="[name='csrfmiddlewaretoken']"
             >
-            <div id="username-error" class="mt-2 text-sm text-red-400">
+            <div id="username-error" class="mt-2 text-sm" style="color: var(--error);">
               {% if form.username.errors %}
                 {{ form.username.errors.0 }}
               {% endif %}
@@ -107,7 +109,7 @@
 
           <!-- Password Field -->
           <div>
-            <label for="{{ form.password1.id_for_label }}" class="block text-sm font-medium text-white/90 mb-2">
+            <label for="{{ form.password1.id_for_label }}" class="block text-sm font-medium mb-2" style="color: var(--text-primary);">
               Password
             </label>
             <input
@@ -116,7 +118,8 @@
               id="{{ form.password1.id_for_label }}"
               value="{{ form.password1.value|default:'' }}"
               required
-              class="appearance-none rounded-lg relative block w-full px-3 py-2.5 border border-white/10 bg-white/5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition"
+              class="appearance-none rounded-lg relative block w-full px-3 py-2.5 transition focus:outline-none focus:ring-2"
+              style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary);"
               placeholder="Create a strong password"
             >
             {% if form.password1.errors %}
@@ -124,14 +127,14 @@
                 {{ form.password1.errors.0 }}
               </p>
             {% endif %}
-            <p class="mt-2 text-xs text-white/50">
+            <p class="mt-2 text-xs" style="color: var(--text-secondary);">
               Must be at least 8 characters with letters and numbers
             </p>
           </div>
 
           <!-- Confirm Password Field -->
           <div>
-            <label for="{{ form.password2.id_for_label }}" class="block text-sm font-medium text-white/90 mb-2">
+            <label for="{{ form.password2.id_for_label }}" class="block text-sm font-medium mb-2" style="color: var(--text-primary);">
               Confirm password
             </label>
             <input
@@ -140,7 +143,8 @@
               id="{{ form.password2.id_for_label }}"
               value="{{ form.password2.value|default:'' }}"
               required
-              class="appearance-none rounded-lg relative block w-full px-3 py-2.5 border border-white/10 bg-white/5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition"
+              class="appearance-none rounded-lg relative block w-full px-3 py-2.5 transition focus:outline-none focus:ring-2"
+              style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary);"
               placeholder="Confirm your password"
             >
             {% if form.password2.errors %}
@@ -159,17 +163,18 @@
               name="terms"
               type="checkbox"
               required
-              class="h-4 w-4 rounded border-white/10 bg-white/5 text-brand focus:ring-brand focus:ring-offset-0"
+              class="h-4 w-4 rounded focus:ring-offset-0"
+              style="background-color: var(--input-bg); border: 1px solid var(--input-border); accent-color: var(--brand-secondary);"
             >
           </div>
           <div class="ml-3 text-sm">
-            <label for="terms" class="text-white/70">
+            <label for="terms" style="color: var(--text-secondary);">
               I agree to the
-              <a href="/terms/" class="font-medium text-brand hover:text-brand/80 transition">
+              <a href="/terms/" class="font-medium transition" style="color: var(--brand-secondary);">
                 Terms and Conditions
               </a>
               and
-              <a href="/privacy/" class="font-medium text-brand hover:text-brand/80 transition">
+              <a href="/privacy/" class="font-medium transition" style="color: var(--brand-secondary);">
                 Privacy Policy
               </a>
             </label>
@@ -180,7 +185,8 @@
         <div class="space-y-3">
           <button
             type="submit"
-            class="w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-happy hover:bg-happy/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-happy transition"
+            class="w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-semibold rounded-lg text-white focus:outline-none transition"
+            style="background-color: var(--button-primary);"
           >
             Create account
           </button>
@@ -188,7 +194,8 @@
           {% if form.errors %}
           <a
             href="{% url 'account_signup' %}"
-            class="w-full flex justify-center py-2.5 px-4 border border-white/20 text-sm font-medium rounded-lg text-white/70 bg-white/5 hover:bg-white/10 focus:outline-none transition"
+            class="w-full flex justify-center py-2.5 px-4 text-sm font-medium rounded-lg focus:outline-none transition"
+            style="background-color: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-primary);"
           >
             Clear form and start over
           </a>
@@ -206,16 +213,17 @@
         <div class="mt-6">
           <div class="relative">
             <div class="absolute inset-0 flex items-center">
-              <div class="w-full border-t border-white/10"></div>
+              <div class="w-full" style="border-top: 1px solid var(--card-border);"></div>
             </div>
             <div class="relative flex justify-center text-sm">
-              <span class="px-2 bg-transparent text-white/50">Or sign up with</span>
+              <span class="px-2" style="background: transparent; color: var(--text-secondary);">Or sign up with</span>
             </div>
           </div>
 
           <div class="mt-6 grid grid-cols-2 gap-3">
             {% for provider in providers %}
-              <a href="{% provider_login_url provider.id %}" class="w-full inline-flex justify-center py-2 px-4 border border-white/10 rounded-lg bg-white/5 text-sm font-medium text-white hover:bg-white/10 transition">
+              <a href="{% provider_login_url provider.id %}" class="w-full inline-flex justify-center py-2 px-4 rounded-lg text-sm font-medium transition"
+                 style="background-color: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-primary);">
                 {{ provider.name }}
               </a>
             {% endfor %}

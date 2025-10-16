@@ -9,19 +9,19 @@
   <div class="max-w-md w-full space-y-8">
     <!-- Header -->
     <div class="text-center">
-      <h2 class="text-3xl font-extrabold text-white">
+      <h2 class="text-3xl font-extrabold" style="color: var(--text-primary);">
         Welcome back
       </h2>
-      <p class="mt-2 text-sm text-white/70">
+      <p class="mt-2 text-sm" style="color: var(--text-secondary);">
         Or
-        <a href="{% url 'account_signup' %}" class="font-medium text-brand hover:text-brand/80 transition">
+        <a href="{% url 'account_signup' %}" class="font-medium transition" style="color: var(--brand-secondary);">
           create a new account
         </a>
       </p>
     </div>
 
     <!-- Login Form -->
-    <div class="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-8">
+  <div class="rounded-xl p-8" style="background-color: var(--card-bg); border: 1px solid var(--card-border); backdrop-filter: blur(10px);">
       <form 
         method="post" 
         action="{% url 'account_login' %}"
@@ -49,7 +49,7 @@
         <div class="space-y-4">
           <!-- Username/Email Field -->
           <div>
-            <label for="{{ form.login.id_for_label }}" class="block text-sm font-medium text-white/90 mb-2">
+            <label for="{{ form.login.id_for_label }}" class="block text-sm font-medium mb-2" style="color: var(--text-primary);">
               Username or Email
             </label>
             <input
@@ -58,7 +58,8 @@
               id="{{ form.login.id_for_label }}"
               value="{{ form.login.value|default:'' }}"
               required
-              class="appearance-none rounded-lg relative block w-full px-3 py-2.5 border border-white/10 bg-white/5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition"
+              class="appearance-none rounded-lg relative block w-full px-3 py-2.5 transition focus:outline-none focus:ring-2"
+              style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary);"
               placeholder="Enter your username or email"
               hx-post="{% url 'validate_field' %}"
               hx-trigger="blur"
@@ -75,7 +76,7 @@
 
           <!-- Password Field -->
           <div>
-            <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-white/90 mb-2">
+            <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium mb-2" style="color: var(--text-primary);">
               Password
             </label>
             <input
@@ -84,7 +85,8 @@
               id="{{ form.password.id_for_label }}"
               value="{{ form.password.value|default:'' }}"
               required
-              class="appearance-none rounded-lg relative block w-full px-3 py-2.5 border border-white/10 bg-white/5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition"
+              class="appearance-none rounded-lg relative block w-full px-3 py-2.5 transition focus:outline-none focus:ring-2"
+              style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary);"
               placeholder="Enter your password"
             >
             {% if form.password.errors %}
@@ -106,15 +108,16 @@
               name="{{ form.remember.name }}"
               type="checkbox"
               {% if form.remember.value %}checked{% endif %}
-              class="h-4 w-4 rounded border-white/10 bg-white/5 text-brand focus:ring-brand focus:ring-offset-0"
+              class="h-4 w-4 rounded focus:ring-offset-0"
+              style="background-color: var(--input-bg); border: 1px solid var(--input-border); accent-color: var(--brand-secondary);"
             >
-            <label for="{{ form.remember.id_for_label }}" class="ml-2 block text-sm text-white/70">
+            <label for="{{ form.remember.id_for_label }}" class="ml-2 block text-sm" style="color: var(--text-secondary);">
               Remember me
             </label>
           </div>
 
           <div class="text-sm">
-            <a href="{% url 'account_reset_password' %}" class="font-medium text-brand hover:text-brand/80 transition">
+            <a href="{% url 'account_reset_password' %}" class="font-medium transition" style="color: var(--brand-secondary);">
               Forgot password?
             </a>
           </div>
@@ -124,7 +127,8 @@
         <div>
           <button
             type="submit"
-            class="group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-brand hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand transition"
+            class="group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-semibold rounded-lg text-white focus:outline-none transition"
+            style="background-color: var(--button-secondary);"
           >
             Sign in
           </button>
@@ -141,16 +145,17 @@
         <div class="mt-6">
           <div class="relative">
             <div class="absolute inset-0 flex items-center">
-              <div class="w-full border-t border-white/10"></div>
+              <div class="w-full" style="border-top: 1px solid var(--card-border);"></div>
             </div>
             <div class="relative flex justify-center text-sm">
-              <span class="px-2 bg-transparent text-white/50">Or continue with</span>
+              <span class="px-2" style="background: transparent; color: var(--text-secondary);">Or continue with</span>
             </div>
           </div>
 
           <div class="mt-6 grid grid-cols-2 gap-3">
             {% for provider in providers %}
-              <a href="{% provider_login_url provider.id %}" class="w-full inline-flex justify-center py-2 px-4 border border-white/10 rounded-lg bg-white/5 text-sm font-medium text-white hover:bg-white/10 transition">
+              <a href="{% provider_login_url provider.id %}" class="w-full inline-flex justify-center py-2 px-4 rounded-lg text-sm font-medium transition"
+                 style="background-color: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-primary);">
                 {{ provider.name }}
               </a>
             {% endfor %}
