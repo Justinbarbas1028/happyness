@@ -1,0 +1,32 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}{{ title|default:"Happyness" }}{% endblock %}</title>
+    <link rel="icon" href="{% static 'images/logo.svg' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <header class="container">
+      <div class="brand">
+        <img src="{% static 'images/logo.svg' %}" alt="Logo" class="logo" />
+        <span>Happyness</span>
+      </div>
+      <nav>
+        <a href="/">Home</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="container">
+      <small>&copy; <span id="year"></span> Happyness</small>
+    </footer>
+
+    <script src="{% static 'js/app.js' %}"></script>
+  </body>
+</html>
