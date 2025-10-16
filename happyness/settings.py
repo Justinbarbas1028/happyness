@@ -163,9 +163,12 @@ AUTHENTICATION_BACKENDS = [
 # Allauth configuration (updated for latest version)
 ACCOUNT_LOGIN_METHODS = {'username', 'email'}
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_EMAIL_VERIFICATION = 'none'  # Changed from 'optional' to 'none' for development
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
+
+# Email Configuration (Development)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Crispy Forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'tailwind'
