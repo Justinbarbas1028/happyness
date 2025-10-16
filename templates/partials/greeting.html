@@ -1,0 +1,7 @@
+<div class="rounded-md border border-white/15 bg-white/5 px-3 py-2">
+  {% if user.is_authenticated %}
+    <span class="text-green-300">Hello, {{ user.username }}!</span>
+  {% else %}
+    <span class="text-white/80">Hello, friend!</span>
+  {% endif %}
+</div>

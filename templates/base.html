@@ -6,24 +6,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{% block title %}{{ title|default:"Happyness" }}{% endblock %}</title>
     <link rel="icon" href="{% static 'images/logo.svg' %}" />
+    <!-- Tailwind (Play CDN for quick dev) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: '#7cacf8',
+              happy: '#39b54a',
+            }
+          }
+        }
+      }
+    </script>
+    <!-- Optional: legacy styles (background, minor tweaks) -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
   </head>
   <body>
-    <header class="container">
-      <div class="brand">
-        <img src="{% static 'images/logo.svg' %}" alt="Logo" class="logo" />
-        <span>Happyness</span>
+    <header class="border-b border-white/10 backdrop-blur bg-white/5">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-4">
+        <a href="/" class="flex items-center gap-2 font-semibold text-white no-underline">
+          <img src="{% static 'images/logo.svg' %}" alt="Logo" class="w-7 h-7" />
+          <span>HappyNess <span class="text-happy font-bold">Project</span></span>
+        </a>
+        <nav class="mx-auto hidden md:flex items-center gap-6 text-sm">
+          {% if user.is_authenticated %}
+            <a href="/home/" class="text-white/70 hover:text-white">Home</a>
+          {% else %}
+            <a href="/" class="text-white/70 hover:text-white">Home</a>
+          {% endif %}
+          <a href="/about/" class="text-white/70 hover:text-white">About</a>
+          <a href="/products/" class="text-white/70 hover:text-white">Products</a>
+          <a href="/faqs/" class="text-white/70 hover:text-white">FAQs</a>
+        </nav>
+        <div class="ml-auto">
+          {% if user.is_authenticated %}
+            <form action="/accounts/logout/" method="post">
+              {% csrf_token %}
+              <button type="submit" class="inline-flex items-center rounded-md bg-happy text-white font-semibold px-4 py-2">Logout</button>
+            </form>
+          {% else %}
+            <a href="/accounts/login/" class="inline-flex items-center rounded-md bg-happy text-white font-semibold px-4 py-2">Sign In</a>
+          {% endif %}
+        </div>
       </div>
-      <nav>
-        <a href="/">Home</a>
-      </nav>
     </header>
 
-    <main class="container">
+    <main class="max-w-6xl mx-auto px-4 my-6">
       {% block content %}{% endblock %}
     </main>
 
-    <footer class="container">
+    <footer class="max-w-6xl mx-auto px-4 py-6 text-white/60">
       <small>&copy; <span id="year"></span> Happyness</small>
     </footer>
 
