@@ -25,8 +25,6 @@
 
   // Set theme
   function setTheme(theme) {
-    console.log('Setting theme to:', theme);
-    
     if (theme === THEME_DARK) {
       document.documentElement.setAttribute('data-theme', THEME_DARK);
     } else {
@@ -39,28 +37,20 @@
 
   // Toggle between light and dark
   function toggleTheme() {
-    console.log('Toggle theme clicked');
     const currentTheme = getCurrentTheme();
     const newTheme = currentTheme === THEME_DARK ? THEME_LIGHT : THEME_DARK;
-    console.log('Switching from', currentTheme, 'to', newTheme);
     setTheme(newTheme);
   }
 
   // Update toggle button icon
   function updateToggleIcon(theme) {
     const toggleBtn = document.getElementById('themeToggle');
-    if (!toggleBtn) {
-      console.warn('Theme toggle button not found');
-      return;
-    }
+    if (!toggleBtn) return;
 
     const sunIcon = toggleBtn.querySelector('.sun-icon');
     const moonIcon = toggleBtn.querySelector('.moon-icon');
 
-    if (!sunIcon || !moonIcon) {
-      console.warn('Theme icons not found');
-      return;
-    }
+    if (!sunIcon || !moonIcon) return;
 
     if (theme === THEME_DARK) {
       // Dark mode: show sun icon (to switch back to light)
@@ -73,45 +63,42 @@
     }
   }
 
-  // Initialize theme on page load
+  // Initialize theme logic
   function initTheme() {
-    console.log('Initializing theme system...');
-    
-    // Get stored theme or default to light
+    // 1. Set initial theme (idempotent)
     const storedTheme = getStoredTheme();
-    console.log('Stored theme:', storedTheme);
-    
-    // Set the theme
     setTheme(storedTheme);
 
-    // Add click handler to toggle button
+    // 2. Attach event listener to toggle button
+    // This needs to happen every time the button is re-rendered (e.g. HTMX swap)
     const toggleBtn = document.getElementById('themeToggle');
     if (toggleBtn) {
-      console.log('Adding click handler to theme toggle button');
-      toggleBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        toggleTheme();
-      });
-    } else {
-      console.warn('Theme toggle button not found during initialization');
+      // Remove old listener to be safe (though replacing element removes it anyway)
+      toggleBtn.removeEventListener('click', handleToggleClick);
+      toggleBtn.addEventListener('click', handleToggleClick);
     }
   }
 
-  // Run immediately to prevent flash
+  function handleToggleClick(e) {
+    e.preventDefault();
+    toggleTheme();
+  }
+
+  // Run immediately to prevent flash (if script is in head)
   const storedTheme = localStorage.getItem(THEME_KEY);
   if (storedTheme === THEME_DARK) {
     document.documentElement.setAttribute('data-theme', THEME_DARK);
   }
 
-  // Run on DOM load
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTheme);
+  // Initialize on load and after HTMX swaps
+  if (typeof htmx !== 'undefined') {
+    htmx.onLoad(initTheme);
   } else {
-    initTheme();
+    // Fallback if HTMX isn't loaded yet
+    document.addEventListener('DOMContentLoaded', initTheme);
   }
 
   // Expose toggle function globally
   window.toggleTheme = toggleTheme;
   
-  console.log('Theme system loaded');
 })();
