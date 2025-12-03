@@ -152,4 +152,41 @@ document.addEventListener('DOMContentLoaded', () => {
   initGallery();
   // Re-init gallery on HTMX content swaps
   document.body.addEventListener('htmx:afterSwap', initGallery);
+
+  // ==========================================================================
+  // 3D Tilt Effect
+  // ==========================================================================
+  function init3DTilt() {
+    const card = document.getElementById('tiltCard');
+    if (!card) return;
+
+    // Prevent double-binding
+    if (card.dataset.tiltBound === '1') return;
+    card.dataset.tiltBound = '1';
+
+    const container = card.parentElement; // The container with perspective
+
+    container.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      // Calculate rotation (max 15 degrees)
+      // Reverse signs for "follow mouse" effect
+      const rotateX = ((y - centerY) / centerY) * 15; 
+      const rotateY = ((x - centerX) / centerX) * -15;
+
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    container.addEventListener('mouseleave', () => {
+      card.style.transform = 'rotateX(0) rotateY(0)';
+    });
+  }
+
+  init3DTilt();
+  document.body.addEventListener('htmx:afterSwap', init3DTilt);
 });

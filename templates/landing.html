@@ -39,9 +39,9 @@
       <div class="relative hidden md:block" data-aos="zoom-in" data-aos-delay="200">
         <div class="absolute inset-0 bg-gradient-to-tr from-[var(--brand-primary)] to-[var(--brand-secondary)] rounded-2xl opacity-20 blur-2xl transform rotate-3"></div>
         <div class="w-full max-w-[600px] h-[400px]" style="perspective: 1000px;">
-          <div class="gallery-container w-full h-full transform rotate-2 transition-transform duration-500 hover:rotate-0">
+          <div id="tiltCard" class="gallery-container w-full h-full transform transition-transform duration-100 ease-out" style="transform-style: preserve-3d;">
             <div class="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl" 
-                 style="background: linear-gradient(to bottom right, var(--bg-secondary), var(--card-bg)); box-shadow: 0 25px 50px -12px var(--card-shadow), 0 0 0 1px var(--card-border);">
+                 style="background: linear-gradient(to bottom right, var(--bg-secondary), var(--card-bg)); box-shadow: 0 25px 50px -12px var(--card-shadow), 0 0 0 1px var(--card-border); transform: translateZ(20px);">
               <div class="slides-container relative w-full h-full" id="slidesContainer">
                 <div class="slide absolute inset-0 opacity-0 transform translate-x-full scale-110 transition-all duration-1000 ease-out active" data-index="0">
                   <img src="https://images.unsplash.com/photo-1706806595208-0e823368f240?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21tdW5pdHklMjB2b2x1bnRlZXJzfGVufDF8fHx8MTc2NDc1MTY1MXww&ixlib=rb-4.1.0&q=80&w=1080" alt="Community volunteers" class="w-full h-full object-cover">
@@ -61,7 +61,7 @@
                 </div>
               </div>
 
-              <div class="nav-controls absolute top-1/2 left-0 right-0 -translate-y-1/2 flex justify-between px-4 opacity-0 hover:opacity-100 transition-opacity duration-300 z-10">
+              <div class="nav-controls absolute top-1/2 left-0 right-0 flex justify-between px-4 opacity-0 hover:opacity-100 transition-opacity duration-300 z-10" style="transform: translateY(-50%) translateZ(40px);">
                 <button id="prevBtn" aria-label="Previous image" 
                         class="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 shadow-md"
                         style="background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); border: none;">
