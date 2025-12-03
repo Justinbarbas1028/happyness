@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}{{ title }}{% endblock %}
-{% block content %}
 
-<!-- Hero Section -->
-<section class="relative py-20 overflow-hidden animate-fade-in">
+{% block main_class %}{% endblock %}
+
+{% block content %}
+<section class="relative min-h-screen flex items-center overflow-hidden animate-fade-in">
   <div class="absolute inset-0 opacity-10 pointer-events-none"
     style="background: radial-gradient(circle at top right, var(--brand-primary), transparent 40%), radial-gradient(circle at bottom left, var(--brand-secondary), transparent 40%); animation: gradientFlow 15s ease infinite;">
   </div>
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+  <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
     <div class="grid md:grid-cols-2 gap-12 items-center">
       <div class="space-y-8 text-center md:text-left animate-slide-up">
         <h1 class="text-5xl md:text-6xl font-bold leading-tight tracking-tight" style="color: var(--text-primary);">
-          Empowering Communities, <br>
+          Empowering Communities,<br>
           <span
             class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand-primary)] to-[var(--brand-secondary)]">Creating
             Change</span>
@@ -25,28 +25,22 @@
         <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
           {% if user.is_authenticated %}
           <a href="{% url 'home' %}"
-            class="btn btn-primary text-lg px-8 py-4 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
-            Go to Dashboard
-          </a>
+            class="btn btn-primary text-lg px-8 py-4 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">Go
+            to Dashboard</a>
           {% else %}
           <a href="{% url 'account_signup' %}"
-            class="btn btn-primary text-lg px-8 py-4 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
-            Join the Movement
-          </a>
+            class="btn btn-primary text-lg px-8 py-4 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">Join
+            the Movement</a>
           {% endif %}
-          <a href="{% url 'about' %}" class="btn btn-outline text-lg px-8 py-4">
-            Learn More
-          </a>
+          <a href="{% url 'about' %}" class="btn btn-outline text-lg px-8 py-4">Learn More</a>
         </div>
       </div>
-
       <div class="relative hidden md:block animate-scale-in stagger-2">
         <div
           class="absolute inset-0 bg-gradient-to-tr from-[var(--brand-primary)] to-[var(--brand-secondary)] rounded-2xl opacity-20 blur-2xl transform rotate-3">
         </div>
         <div
           class="relative rounded-2xl overflow-hidden shadow-2xl border border-[var(--card-border)] bg-[var(--card-bg)] p-2 glass">
-          <!-- Placeholder for a hero image or illustration. Using a generated pattern for now to keep it clean and professional without external assets -->
           <div
             class="aspect-video rounded-xl bg-gradient-to-br from-[var(--bg-secondary)] to-[var(--bg-primary)] flex items-center justify-center overflow-hidden relative">
             <div class="absolute inset-0 opacity-10"
@@ -64,131 +58,8 @@
   </div>
 </section>
 
-<!-- Mission Section -->
-<section class="py-20 bg-[var(--bg-secondary)] animate-on-scroll">
-  <div class="max-w-4xl mx-auto px-4 text-center">
-    <h2 class="text-3xl md:text-4xl font-bold mb-6" style="color: var(--text-primary);">Our Mission</h2>
-    <p class="text-xl leading-relaxed" style="color: var(--text-secondary);">
-      "To build a sustainable ecosystem of kindness where every volunteer's effort is valued, tracked, and amplified. We
-      believe in the power of community to solve the most pressing challenges of our time."
-    </p>
-  </div>
-</section>
-
-<!-- Impact Stats -->
-<section class="py-20 border-y border-[var(--card-border)] bg-[var(--bg-primary)] animate-on-scroll">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-      <div
-        class="p-6 rounded-xl bg-[var(--card-bg)] shadow-sm border border-[var(--card-border)] hover:scale-105 transition-transform duration-300">
-        <div class="text-4xl font-bold mb-2" style="color: var(--brand-primary);">50+</div>
-        <div class="text-sm font-medium uppercase tracking-wider" style="color: var(--text-muted);">Communities Served
-        </div>
-      </div>
-      <div
-        class="p-6 rounded-xl bg-[var(--card-bg)] shadow-sm border border-[var(--card-border)] hover:scale-105 transition-transform duration-300">
-        <div class="text-4xl font-bold mb-2" style="color: var(--brand-secondary);">1,200+</div>
-        <div class="text-sm font-medium uppercase tracking-wider" style="color: var(--text-muted);">Active Volunteers
-        </div>
-      </div>
-      <div
-        class="p-6 rounded-xl bg-[var(--card-bg)] shadow-sm border border-[var(--card-border)] hover:scale-105 transition-transform duration-300">
-        <div class="text-4xl font-bold mb-2" style="color: var(--brand-accent);">250+</div>
-        <div class="text-sm font-medium uppercase tracking-wider" style="color: var(--text-muted);">Projects Completed
-        </div>
-      </div>
-      <div
-        class="p-6 rounded-xl bg-[var(--card-bg)] shadow-sm border border-[var(--card-border)] hover:scale-105 transition-transform duration-300">
-        <div class="text-4xl font-bold mb-2" style="color: var(--warning);">10k+</div>
-        <div class="text-sm font-medium uppercase tracking-wider" style="color: var(--text-muted);">Lives Impacted</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Focus Areas -->
-<section class="py-24 animate-on-scroll">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--text-primary);">Our Focus Areas</h2>
-      <p class="max-w-2xl mx-auto text-lg" style="color: var(--text-secondary);">We concentrate our efforts where they
-        matter most, driving sustainable change in key sectors.</p>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-8">
-      <!-- Card 1 -->
-      <div
-        class="group p-8 rounded-2xl bg-[var(--card-bg)] border border-[var(--card-border)] shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 glass-panel">
-        <div
-          class="w-14 h-14 rounded-lg flex items-center justify-center mb-6 bg-blue-100 text-blue-600 group-hover:scale-110 transition-transform">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
-            </path>
-          </svg>
-        </div>
-        <h3 class="text-xl font-bold mb-3" style="color: var(--text-primary);">Community Outreach</h3>
-        <p style="color: var(--text-secondary);">Direct engagement with local communities to understand their needs and
-          deliver targeted support.</p>
-      </div>
-
-      <!-- Card 2 -->
-      <div
-        class="group p-8 rounded-2xl bg-[var(--card-bg)] border border-[var(--card-border)] shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 glass-panel">
-        <div
-          class="w-14 h-14 rounded-lg flex items-center justify-center mb-6 bg-green-100 text-green-600 group-hover:scale-110 transition-transform">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
-            </path>
-          </svg>
-        </div>
-        <h3 class="text-xl font-bold mb-3" style="color: var(--text-primary);">Education & Literacy</h3>
-        <p style="color: var(--text-secondary);">Providing resources, tutoring, and scholarships to empower the next
-          generation of leaders.</p>
-      </div>
-
-      <!-- Card 3 -->
-      <div
-        class="group p-8 rounded-2xl bg-[var(--card-bg)] border border-[var(--card-border)] shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 glass-panel">
-        <div
-          class="w-14 h-14 rounded-lg flex items-center justify-center mb-6 bg-red-100 text-red-600 group-hover:scale-110 transition-transform">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
-            </path>
-          </svg>
-        </div>
-        <h3 class="text-xl font-bold mb-3" style="color: var(--text-primary);">Health & Wellness</h3>
-        <p style="color: var(--text-secondary);">Organizing medical missions, feeding programs, and mental health
-          awareness campaigns.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA Section -->
-<section class="py-20 relative overflow-hidden animate-on-scroll">
-  <div class="absolute inset-0 bg-[var(--brand-primary)] opacity-10"></div>
-  <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
-    <h2 class="text-3xl md:text-5xl font-bold mb-6" style="color: var(--text-primary);">Ready to Make a Difference?</h2>
-    <p class="text-xl mb-10 max-w-2xl mx-auto" style="color: var(--text-secondary);">
-      Whether you want to volunteer your time, donate resources, or partner with us, there's a place for you in the
-      HappyNess Project.
-    </p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      {% if not user.is_authenticated %}
-      <a href="{% url 'account_signup' %}"
-        class="btn btn-primary text-lg px-10 py-4 shadow-xl hover:scale-105 transition-transform">
-        Become a Volunteer
-      </a>
-      {% endif %}
-      <a href="{% url 'about' %}"
-        class="btn btn-outline text-lg px-10 py-4 bg-[var(--bg-primary)] hover:scale-105 transition-transform">
-        Contact Us
-      </a>
-    </div>
-  </div>
-</section>
-
+{% include 'partials/mission.html' %}
+{% include 'partials/impact.html' %}
+{% include 'partials/focus.html' %}
+{% include 'partials/cta.html' %}
 {% endblock %}

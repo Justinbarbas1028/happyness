@@ -113,7 +113,7 @@
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-4 my-6 animate-fade-in">
+  <main class="{% block main_class %}max-w-6xl mx-auto px-4 my-6{% endblock %} animate-fade-in">
     {% block content %}{% endblock %}
   </main>
 
