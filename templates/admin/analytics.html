@@ -1,0 +1,187 @@
+{% extends 'admin/base_admin.html' %}
+{% block title %}Analytics{% endblock %}
+{% block page_title %}Analytics{% endblock %}
+
+{% block content %}
+<!-- Date Range Selector -->
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6" data-aos="fade-up">
+  <div>
+    <p class="text-sm" style="color: var(--text-secondary);">View insights and metrics for your platform.</p>
+  </div>
+  <div class="flex items-center gap-2">
+    <select class="px-4 py-2 rounded-xl text-sm transition-all duration-200 focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none"
+            style="background-color: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-primary);">
+      <option>Last 7 days</option>
+      <option>Last 30 days</option>
+      <option>Last 90 days</option>
+      <option>This year</option>
+    </select>
+  </div>
+</div>
+
+<!-- Metrics Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+  <div class="card p-5" data-aos="fade-up" data-aos-delay="0">
+    <div class="flex items-center justify-between mb-3">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-blue-100 text-blue-600">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+        </svg>
+      </div>
+      <span class="text-xs font-medium px-2 py-1 rounded-full bg-green-100 text-green-700">+12%</span>
+    </div>
+    <p class="text-2xl font-bold mb-1" style="color: var(--text-primary);">1,234</p>
+    <p class="text-sm" style="color: var(--text-muted);">Page Views</p>
+  </div>
+
+  <div class="card p-5" data-aos="fade-up" data-aos-delay="100">
+    <div class="flex items-center justify-between mb-3">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-green-100 text-green-600">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+        </svg>
+      </div>
+      <span class="text-xs font-medium px-2 py-1 rounded-full bg-green-100 text-green-700">+8%</span>
+    </div>
+    <p class="text-2xl font-bold mb-1" style="color: var(--text-primary);">56</p>
+    <p class="text-sm" style="color: var(--text-muted);">New Signups</p>
+  </div>
+
+  <div class="card p-5" data-aos="fade-up" data-aos-delay="200">
+    <div class="flex items-center justify-between mb-3">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-purple-100 text-purple-600">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+      <span class="text-xs font-medium px-2 py-1 rounded-full bg-green-100 text-green-700">+5%</span>
+    </div>
+    <p class="text-2xl font-bold mb-1" style="color: var(--text-primary);">4m 32s</p>
+    <p class="text-sm" style="color: var(--text-muted);">Avg. Session</p>
+  </div>
+
+  <div class="card p-5" data-aos="fade-up" data-aos-delay="300">
+    <div class="flex items-center justify-between mb-3">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-orange-100 text-orange-600">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+        </svg>
+      </div>
+      <span class="text-xs font-medium px-2 py-1 rounded-full bg-red-100 text-red-700">-2%</span>
+    </div>
+    <p class="text-2xl font-bold mb-1" style="color: var(--text-primary);">32%</p>
+    <p class="text-sm" style="color: var(--text-muted);">Bounce Rate</p>
+  </div>
+</div>
+
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+  <!-- Traffic Overview -->
+  <div class="card p-5" data-aos="fade-up" data-aos-delay="400">
+    <h3 class="text-lg font-bold mb-4" style="color: var(--text-primary);">Traffic Overview</h3>
+    <div class="h-64 flex items-end justify-between gap-2">
+      {% for day in "MTWTFSS" %}
+      <div class="flex-1 flex flex-col items-center gap-2">
+        <div class="w-full rounded-t-lg transition-all duration-300 hover:opacity-80" 
+             style="height: {% widthratio forloop.counter 7 100 %}%; min-height: 20%; background: linear-gradient(to top, var(--brand-primary), var(--brand-secondary));"></div>
+        <span class="text-xs font-medium" style="color: var(--text-muted);">{{ day }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- User Activity -->
+  <div class="card p-5" data-aos="fade-up" data-aos-delay="500">
+    <h3 class="text-lg font-bold mb-4" style="color: var(--text-primary);">User Activity</h3>
+    <div class="space-y-4">
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-sm font-medium" style="color: var(--text-primary);">Active Users</span>
+          <span class="text-sm font-bold" style="color: var(--brand-primary);">78%</span>
+        </div>
+        <div class="w-full h-2 rounded-full" style="background-color: var(--bg-secondary);">
+          <div class="h-full rounded-full" style="width: 78%; background: linear-gradient(to right, var(--brand-primary), var(--brand-secondary));"></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-sm font-medium" style="color: var(--text-primary);">Returning Users</span>
+          <span class="text-sm font-bold" style="color: var(--success);">65%</span>
+        </div>
+        <div class="w-full h-2 rounded-full" style="background-color: var(--bg-secondary);">
+          <div class="h-full rounded-full bg-green-500" style="width: 65%;"></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-sm font-medium" style="color: var(--text-primary);">New Users</span>
+          <span class="text-sm font-bold" style="color: var(--brand-accent);">35%</span>
+        </div>
+        <div class="w-full h-2 rounded-full" style="background-color: var(--bg-secondary);">
+          <div class="h-full rounded-full bg-purple-500" style="width: 35%;"></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-sm font-medium" style="color: var(--text-primary);">Mobile Users</span>
+          <span class="text-sm font-bold" style="color: var(--info);">52%</span>
+        </div>
+        <div class="w-full h-2 rounded-full" style="background-color: var(--bg-secondary);">
+          <div class="h-full rounded-full bg-blue-500" style="width: 52%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Top Pages -->
+<div class="card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="600">
+  <div class="p-5 border-b" style="border-color: var(--card-border);">
+    <h3 class="text-lg font-bold" style="color: var(--text-primary);">Top Pages</h3>
+  </div>
+  <div class="overflow-x-auto">
+    <table class="w-full">
+      <thead>
+        <tr style="background-color: var(--bg-secondary);">
+          <th class="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider" style="color: var(--text-muted);">Page</th>
+          <th class="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider" style="color: var(--text-muted);">Views</th>
+          <th class="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider hidden sm:table-cell" style="color: var(--text-muted);">Unique</th>
+          <th class="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider hidden md:table-cell" style="color: var(--text-muted);">Avg. Time</th>
+          <th class="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider" style="color: var(--text-muted);">Trend</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-t hover:bg-[var(--bg-secondary)] transition-colors" style="border-color: var(--card-border);">
+          <td class="px-5 py-4 font-medium" style="color: var(--text-primary);">/</td>
+          <td class="px-5 py-4" style="color: var(--text-secondary);">456</td>
+          <td class="px-5 py-4 hidden sm:table-cell" style="color: var(--text-secondary);">312</td>
+          <td class="px-5 py-4 hidden md:table-cell" style="color: var(--text-secondary);">2m 15s</td>
+          <td class="px-5 py-4"><span class="text-green-600">↑ 12%</span></td>
+        </tr>
+        <tr class="border-t hover:bg-[var(--bg-secondary)] transition-colors" style="border-color: var(--card-border);">
+          <td class="px-5 py-4 font-medium" style="color: var(--text-primary);">/home/</td>
+          <td class="px-5 py-4" style="color: var(--text-secondary);">234</td>
+          <td class="px-5 py-4 hidden sm:table-cell" style="color: var(--text-secondary);">189</td>
+          <td class="px-5 py-4 hidden md:table-cell" style="color: var(--text-secondary);">5m 43s</td>
+          <td class="px-5 py-4"><span class="text-green-600">↑ 8%</span></td>
+        </tr>
+        <tr class="border-t hover:bg-[var(--bg-secondary)] transition-colors" style="border-color: var(--card-border);">
+          <td class="px-5 py-4 font-medium" style="color: var(--text-primary);">/about/</td>
+          <td class="px-5 py-4" style="color: var(--text-secondary);">178</td>
+          <td class="px-5 py-4 hidden sm:table-cell" style="color: var(--text-secondary);">145</td>
+          <td class="px-5 py-4 hidden md:table-cell" style="color: var(--text-secondary);">1m 52s</td>
+          <td class="px-5 py-4"><span class="text-red-600">↓ 3%</span></td>
+        </tr>
+        <tr class="border-t hover:bg-[var(--bg-secondary)] transition-colors" style="border-color: var(--card-border);">
+          <td class="px-5 py-4 font-medium" style="color: var(--text-primary);">/products/</td>
+          <td class="px-5 py-4" style="color: var(--text-secondary);">156</td>
+          <td class="px-5 py-4 hidden sm:table-cell" style="color: var(--text-secondary);">123</td>
+          <td class="px-5 py-4 hidden md:table-cell" style="color: var(--text-secondary);">3m 21s</td>
+          <td class="px-5 py-4"><span class="text-green-600">↑ 15%</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

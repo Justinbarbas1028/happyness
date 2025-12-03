@@ -21,4 +21,10 @@ urlpatterns = [
     path('validate/username/', views.validate_username, name='validate_username'),
     path('validate/email/', views.validate_email, name='validate_email'),
     path('validate/field/', views.validate_field, name='validate_field'),
+    
+    # Admin Dashboard
+    path('admin-panel/', views.admin_dashboard, name='admin_dashboard'),
+    path('admin-panel/users/', views.admin_users, name='admin_users'),
+    path('admin-panel/analytics/', views.admin_analytics, name='admin_analytics'),
+    path('admin-panel/settings/', views.admin_settings, name='admin_settings'),
 ]
