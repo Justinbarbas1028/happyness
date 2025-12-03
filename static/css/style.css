@@ -149,3 +149,45 @@ button:hover { filter: brightness(1.1); }
 .gallery-container:hover .nav-controls {
   opacity: 1;
 }
+
+/* ==========================================================================
+   Mobile Navigation Enhancements
+   ========================================================================== */
+
+/* Animated hamburger icon */
+#mobileMenuBtn[aria-expanded="true"] .hamburger-line:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+#mobileMenuBtn[aria-expanded="true"] .hamburger-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+#mobileMenuBtn[aria-expanded="true"] .hamburger-line:nth-child(3) {
+  width: 100%;
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Mobile menu slide animation */
+#mobileMenu {
+  max-height: 0;
+  transition: max-height 0.3s ease-out, opacity 0.2s ease-out;
+  opacity: 0;
+}
+
+#mobileMenu:not(.hidden) {
+  max-height: 500px;
+  opacity: 1;
+}
+
+/* Mobile nav link hover states */
+.mobile-nav-link:hover,
+.mobile-nav-link:focus {
+  background-color: var(--card-bg) !important;
+  transform: translateX(4px);
+}
+
+.mobile-nav-link:active {
+  transform: scale(0.98) translateX(4px);
+}

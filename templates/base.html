@@ -26,7 +26,7 @@
   <!-- AOS Animation Library -->
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <!-- Optional: legacy styles (background, minor tweaks) -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" /i>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   <!-- HTMX -->
   <script src="https://unpkg.com/htmx.org@1.9.12"></script>
   <!-- AOS Animation Library -->
@@ -45,72 +45,166 @@
 
 <body hx-boost="true">
   <header style="background-color: var(--header-bg); border-bottom: 1px solid var(--header-border);"
-    class="backdrop-blur sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+    class="backdrop-blur-md sticky top-0 z-50 transition-all duration-300">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
+      <!-- Logo -->
       <a href="{% if user.is_authenticated %}{% url 'home' %}{% else %}{% url 'landing' %}{% endif %}"
-        class="flex items-center gap-2 font-semibold no-underline" style="color: var(--text-primary);">
-        <img src="{% static 'images/happyness-logo.jpeg' %}" alt="HappyNess Logo" class="w-7 h-7 rounded-full object-cover" />
-        <span>HappyNess <span class="font-bold" style="color: var(--brand-secondary);">Project</span></span>
+        class="flex items-center gap-2 font-semibold no-underline shrink-0 group" style="color: var(--text-primary);">
+        <div class="relative">
+          <img src="{% static 'images/happyness-logo.jpeg' %}" alt="HappyNess Logo" 
+               class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover ring-2 ring-transparent group-hover:ring-[var(--brand-primary)] transition-all duration-300" />
+          <div class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 hidden sm:block" style="border-color: var(--header-bg);"></div>
+        </div>
+        <span class="text-sm sm:text-base">HappyNess <span class="font-bold" style="color: var(--brand-secondary);">Project</span></span>
       </a>
+
       <!-- Desktop nav -->
-      <nav class="hidden md:flex items-center gap-6 text-sm">
+      <nav class="hidden md:flex items-center gap-1 lg:gap-2">
         {% if user.is_authenticated %}
-        <a href="{% url 'home' %}" style="color: var(--text-secondary);" class="hover:opacity-80 transition">Home</a>
+        <a href="{% url 'home' %}" 
+           class="px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-[var(--card-bg)]" 
+           style="color: var(--text-secondary);">
+          Home
+        </a>
         {% else %}
-        <a href="{% url 'landing' %}" style="color: var(--text-secondary);" class="hover:opacity-80 transition">Home</a>
+        <a href="{% url 'landing' %}" 
+           class="px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-[var(--card-bg)]" 
+           style="color: var(--text-secondary);">
+          Home
+        </a>
         {% endif %}
-        <a href="{% url 'about' %}" style="color: var(--text-secondary);" class="hover:opacity-80 transition">About</a>
-        <a href="{% url 'products' %}" style="color: var(--text-secondary);"
-          class="hover:opacity-80 transition">Products</a>
-        <a href="{% url 'faqs' %}" style="color: var(--text-secondary);" class="hover:opacity-80 transition">FAQs</a>
+        <a href="{% url 'about' %}" 
+           class="px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-[var(--card-bg)]" 
+           style="color: var(--text-secondary);">
+          About
+        </a>
+        <a href="{% url 'products' %}" 
+           class="px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-[var(--card-bg)]" 
+           style="color: var(--text-secondary);">
+          Products
+        </a>
+        <a href="{% url 'faqs' %}" 
+           class="px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-[var(--card-bg)]" 
+           style="color: var(--text-secondary);">
+          FAQs
+        </a>
+        <a href="{% url 'partners' %}" 
+           class="px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-[var(--card-bg)]" 
+           style="color: var(--text-secondary);">
+          Our Partners
+        </a>
       </nav>
 
       <!-- Right actions -->
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 sm:gap-3">
         {% if user.is_authenticated %}
-        <button onclick="showLogoutModal()" class="hidden md:inline-flex btn btn-primary">Logout</button>
+        <!-- User avatar for mobile hint -->
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-secondary)] flex items-center justify-center text-white text-xs font-bold md:hidden">
+            {{ user.username|slice:":1"|upper }}
+          </div>
+          <button onclick="showLogoutModal()" class="hidden md:inline-flex btn btn-primary text-sm">Logout</button>
+        </div>
         {% else %}
-        <a href="/accounts/login/" class="hidden md:inline-flex btn btn-primary">Sign In</a>
+        <a href="/accounts/login/" class="hidden md:inline-flex btn btn-primary text-sm">Sign In</a>
         {% endif %}
+        
         <!-- Mobile hamburger -->
         <button id="mobileMenuBtn" type="button"
-          class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg relative z-50 touch-manipulation cursor-pointer"
+          class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl relative z-50 touch-manipulation cursor-pointer transition-all duration-200 active:scale-95"
           aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation"
           style="background-color: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-primary);">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-            class="w-6 h-6 pointer-events-none">
-            <path fill-rule="evenodd"
-              d="M3.75 5.25a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75zm0 6a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75zm0 6a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z"
-              clip-rule="evenodd" />
-          </svg>
+          <div class="hamburger-icon w-5 h-4 flex flex-col justify-between">
+            <span class="hamburger-line block w-full h-0.5 rounded-full transition-all duration-300" style="background-color: var(--text-primary);"></span>
+            <span class="hamburger-line block w-full h-0.5 rounded-full transition-all duration-300" style="background-color: var(--text-primary);"></span>
+            <span class="hamburger-line block w-3 h-0.5 rounded-full transition-all duration-300 ml-auto" style="background-color: var(--text-primary);"></span>
+          </div>
         </button>
       </div>
     </div>
 
     <!-- Mobile menu -->
-    <div id="mobileMenu" class="md:hidden hidden border-t"
-      style="border-color: var(--card-border); background-color: var(--bg-secondary);">
-      <div class="max-w-6xl mx-auto px-4 py-3 space-y-2">
-        <div class="grid grid-cols-1 gap-2 text-sm">
-          {% if user.is_authenticated %}
-          <a href="{% url 'home' %}" class="py-2 rounded-lg px-3 hover:opacity-90"
-            style="color: var(--text-primary); background-color: var(--card-bg); border: 1px solid var(--card-border);">Home</a>
-          {% else %}
-          <a href="{% url 'landing' %}" class="py-2 rounded-lg px-3 hover:opacity-90"
-            style="color: var(--text-primary); background-color: var(--card-bg); border: 1px solid var(--card-border);">Home</a>
-          {% endif %}
-          <a href="{% url 'about' %}" class="py-2 rounded-lg px-3 hover:opacity-90"
-            style="color: var(--text-primary); background-color: var(--card-bg); border: 1px solid var(--card-border);">About</a>
-          <a href="{% url 'products' %}" class="py-2 rounded-lg px-3 hover:opacity-90"
-            style="color: var(--text-primary); background-color: var(--card-bg); border: 1px solid var(--card-border);">Products</a>
-          <a href="{% url 'faqs' %}" class="py-2 rounded-lg px-3 hover:opacity-90"
-            style="color: var(--text-primary); background-color: var(--card-bg); border: 1px solid var(--card-border);">FAQs</a>
+    <div id="mobileMenu" class="md:hidden hidden overflow-hidden"
+      style="background-color: var(--bg-secondary); border-top: 1px solid var(--card-border);">
+      <div class="max-w-6xl mx-auto px-3 py-4 space-y-3">
+        <!-- User info banner (if authenticated) -->
+        {% if user.is_authenticated %}
+        <div class="flex items-center gap-3 p-3 rounded-xl mb-2" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-secondary)] flex items-center justify-center text-white font-bold">
+            {{ user.username|slice:":1"|upper }}
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="font-semibold text-sm truncate" style="color: var(--text-primary);">{{ user.username }}</p>
+            <p class="text-xs truncate" style="color: var(--text-secondary);">{{ user.email|default:"Welcome back!" }}</p>
+          </div>
         </div>
-        <div class="pt-2">
+        {% endif %}
+        
+        <!-- Navigation links -->
+        <nav class="space-y-1">
           {% if user.is_authenticated %}
-          <button onclick="showLogoutModal()" class="w-full btn btn-primary">Logout</button>
+          <a href="{% url 'home' %}" class="mobile-nav-link flex items-center gap-3 py-3 px-4 rounded-xl transition-all duration-200 active:scale-[0.98]"
+            style="color: var(--text-primary); background-color: var(--card-bg);">
+            <svg class="w-5 h-5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+            <span class="font-medium">Home</span>
+          </a>
           {% else %}
-          <a href="/accounts/login/" class="w-full inline-flex justify-center btn btn-primary">Sign In</a>
+          <a href="{% url 'landing' %}" class="mobile-nav-link flex items-center gap-3 py-3 px-4 rounded-xl transition-all duration-200 active:scale-[0.98]"
+            style="color: var(--text-primary); background-color: var(--card-bg);">
+            <svg class="w-5 h-5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+            <span class="font-medium">Home</span>
+          </a>
+          {% endif %}
+          <a href="{% url 'about' %}" class="mobile-nav-link flex items-center gap-3 py-3 px-4 rounded-xl transition-all duration-200 active:scale-[0.98]"
+            style="color: var(--text-primary); background-color: var(--card-bg);">
+            <svg class="w-5 h-5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="font-medium">About</span>
+          </a>
+          <a href="{% url 'products' %}" class="mobile-nav-link flex items-center gap-3 py-3 px-4 rounded-xl transition-all duration-200 active:scale-[0.98]"
+            style="color: var(--text-primary); background-color: var(--card-bg);">
+            <svg class="w-5 h-5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+            </svg>
+            <span class="font-medium">Products</span>
+          </a>
+          <a href="{% url 'faqs' %}" class="mobile-nav-link flex items-center gap-3 py-3 px-4 rounded-xl transition-all duration-200 active:scale-[0.98]"
+            style="color: var(--text-primary); background-color: var(--card-bg);">
+            <svg class="w-5 h-5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="font-medium">FAQs</span>
+          </a>
+          <a href="{% url 'partners' %}" class="mobile-nav-link flex items-center gap-3 py-3 px-4 rounded-xl transition-all duration-200 active:scale-[0.98]"
+            style="color: var(--text-primary); background-color: var(--card-bg);">
+            <svg class="w-5 h-5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            <span class="font-medium">Our Partners</span>
+          </a>
+        </nav>
+        
+        <!-- Action button -->
+        <div class="pt-3 border-t" style="border-color: var(--card-border);">
+          {% if user.is_authenticated %}
+          <button onclick="showLogoutModal()" class="w-full btn btn-primary flex items-center justify-center gap-2 py-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+            </svg>
+            Sign Out
+          </button>
+          {% else %}
+          <a href="/accounts/login/" class="w-full btn btn-primary flex items-center justify-center gap-2 py-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+            </svg>
+            Sign In
+          </a>
           {% endif %}
         </div>
       </div>

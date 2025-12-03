@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }} - HappyNess{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<div class="text-center mb-12" data-aos="fade-up">
+  <h1 class="text-4xl md:text-5xl font-bold mb-4" style="color: var(--text-primary);">
+    Our <span class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand-primary)] to-[var(--brand-secondary)]">Partners</span>
+  </h1>
+  <p class="text-lg max-w-2xl mx-auto" style="color: var(--text-secondary);">
+    Together with our amazing partners, we're making a bigger impact in communities across the Philippines.
+  </p>
+</div>
+
+<!-- Partners Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+  <!-- Partner Card 1 -->
+  <div class="card p-6 text-center group hover:scale-[1.02] transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+    <div class="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center" 
+         style="background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));">
+      <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+      </svg>
+    </div>
+    <h3 class="text-xl font-bold mb-2" style="color: var(--text-primary);">Local Government Units</h3>
+    <p class="text-sm" style="color: var(--text-secondary);">
+      Partnering with LGUs to bring volunteer programs directly to communities in need.
+    </p>
+  </div>
+
+  <!-- Partner Card 2 -->
+  <div class="card p-6 text-center group hover:scale-[1.02] transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+    <div class="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center"
+         style="background: linear-gradient(135deg, var(--brand-secondary), var(--brand-accent));">
+      <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+      </svg>
+    </div>
+    <h3 class="text-xl font-bold mb-2" style="color: var(--text-primary);">Educational Institutions</h3>
+    <p class="text-sm" style="color: var(--text-secondary);">
+      Schools and universities joining us to empower student volunteers and service learning.
+    </p>
+  </div>
+
+  <!-- Partner Card 3 -->
+  <div class="card p-6 text-center group hover:scale-[1.02] transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+    <div class="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center"
+         style="background: linear-gradient(135deg, var(--brand-accent), var(--brand-primary));">
+      <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+      </svg>
+    </div>
+    <h3 class="text-xl font-bold mb-2" style="color: var(--text-primary);">NGOs & Non-Profits</h3>
+    <p class="text-sm" style="color: var(--text-secondary);">
+      Collaborating with organizations that share our vision for community development.
+    </p>
+  </div>
+
+  <!-- Partner Card 4 -->
+  <div class="card p-6 text-center group hover:scale-[1.02] transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
+    <div class="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center"
+         style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+      <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+      </svg>
+    </div>
+    <h3 class="text-xl font-bold mb-2" style="color: var(--text-primary);">Corporate Partners</h3>
+    <p class="text-sm" style="color: var(--text-secondary);">
+      Businesses committed to corporate social responsibility and employee volunteering.
+    </p>
+  </div>
+
+  <!-- Partner Card 5 -->
+  <div class="card p-6 text-center group hover:scale-[1.02] transition-all duration-300" data-aos="fade-up" data-aos-delay="500">
+    <div class="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center"
+         style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
+      <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+      </svg>
+    </div>
+    <h3 class="text-xl font-bold mb-2" style="color: var(--text-primary);">Community Organizations</h3>
+    <p class="text-sm" style="color: var(--text-secondary);">
+      Grassroots groups and barangay organizations driving local initiatives.
+    </p>
+  </div>
+
+  <!-- Partner Card 6 -->
+  <div class="card p-6 text-center group hover:scale-[1.02] transition-all duration-300" data-aos="fade-up" data-aos-delay="600">
+    <div class="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center"
+         style="background: linear-gradient(135deg, #10b981, #3b82f6);">
+      <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+      </svg>
+    </div>
+    <h3 class="text-xl font-bold mb-2" style="color: var(--text-primary);">Youth Organizations</h3>
+    <p class="text-sm" style="color: var(--text-secondary);">
+      Engaging the next generation of change-makers through youth-led programs.
+    </p>
+  </div>
+</div>
+
+<!-- Become a Partner CTA -->
+<div class="card p-8 md:p-12 text-center" data-aos="fade-up" 
+     style="background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));">
+  <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Become a Partner</h2>
+  <p class="text-white/90 max-w-xl mx-auto mb-6">
+    Join our growing network of partners and help us create lasting positive change in communities.
+  </p>
+  <a href="mailto:partners@happyness.ph" class="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
+     style="color: var(--brand-primary);">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+    </svg>
+    Contact Us
+  </a>
+</div>
+
+{% endblock %}

@@ -30,6 +30,10 @@ def faqs(request):
 	return render(request, 'faqs.html', {'title': 'FAQs'})
 
 
+def partners(request):
+	return render(request, 'partners.html', {'title': 'Our Partners'})
+
+
 def htmx_greeting(request):
 	# Return a small partial snippet. HTMX will swap it into the target div.
 	return render(request, 'partials/greeting.html', {

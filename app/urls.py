@@ -12,6 +12,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('products/', views.products, name='products'),
     path('faqs/', views.faqs, name='faqs'),
+    path('partners/', views.partners, name='partners'),
 
     # HTMX demo
     path('htmx/greeting/', views.htmx_greeting, name='htmx_greeting'),
