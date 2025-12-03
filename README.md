@@ -24,7 +24,7 @@ py manage.py runserver
 - `templates/` — base and home templates
 - `static/css/style.css` — site styles
 - `static/js/app.js` — small interactivity
-- `static/images/logo.svg` — favicon/logo
+- `static/images/happyness-logo.jpeg` — favicon/logo
 
 ## Notes
 
