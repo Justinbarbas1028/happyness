@@ -23,10 +23,14 @@
   </script>
   <!-- Theme System (must load first) -->
   <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <!-- Optional: legacy styles (background, minor tweaks) -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" /i>
   <!-- HTMX -->
   <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <!-- AOS Animation Library -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <!-- Theme initialization (prevent FOUC) -->
   <script>
       // Apply stored theme immediately to prevent flash
@@ -215,30 +219,22 @@
         });
       }
 
-      // 2. Scroll Animation Observer
-      const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-      };
+      // 2. Scroll Animation Observer - REPLACED BY AOS
+      // The custom IntersectionObserver code has been removed in favor of AOS library.
+    });
 
-      const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, observerOptions);
+    // Initialize AOS
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100,
+      });
+    });
 
-      // Observe elements within the loaded content
-      const elements = content.querySelectorAll('.animate-on-scroll');
-      elements.forEach(el => observer.observe(el));
-
-      // Also check if 'content' itself is animate-on-scroll
-      if (content.classList && content.classList.contains('animate-on-scroll')) {
-        observer.observe(content);
-      }
+    // Refresh AOS on HTMX content swap
+    document.body.addEventListener('htmx:afterSwap', function() {
+      AOS.refresh();
     });
 
     // Global keydown listener (only needs to be attached once)

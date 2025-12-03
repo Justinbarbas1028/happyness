@@ -82,4 +82,74 @@ document.addEventListener('DOMContentLoaded', () => {
   resetInteractionLocks();
   // And after HTMX swaps
   document.body.addEventListener('htmx:afterSwap', resetInteractionLocks);
+
+  // ==========================================================================
+  // Photo Gallery Slideshow
+  // ==========================================================================
+  function initGallery() {
+    const slidesContainer = document.getElementById('slidesContainer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    
+    if (!slidesContainer || !prevBtn || !nextBtn) return;
+    
+    // Prevent double-binding
+    if (slidesContainer.dataset.bound === '1') return;
+    slidesContainer.dataset.bound = '1';
+    
+    let currentIndex = 0;
+    const slides = slidesContainer.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let autoSlideInterval;
+
+    function goToSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active', 'prev');
+        
+        if (i === index) {
+          slide.classList.add('active');
+        } else if (i < index) {
+          slide.classList.add('prev');
+        }
+      });
+      currentIndex = index;
+    }
+
+    function nextSlide() {
+      const nextIndex = (currentIndex + 1) % totalSlides;
+      goToSlide(nextIndex);
+    }
+
+    function prevSlide() {
+      const prevIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      goToSlide(prevIndex);
+    }
+
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(nextSlide, 3000);
+    }
+
+    function resetAutoSlide() {
+      clearInterval(autoSlideInterval);
+      startAutoSlide();
+    }
+
+    // Event listeners
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      resetAutoSlide();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      resetAutoSlide();
+    });
+
+    // Start auto-sliding
+    startAutoSlide();
+  }
+
+  initGallery();
+  // Re-init gallery on HTMX content swaps
+  document.body.addEventListener('htmx:afterSwap', initGallery);
 });

@@ -3,7 +3,7 @@
 {% block content %}
 
 <!-- Welcome Section -->
-<div class="mb-8 animate-slide-up">
+<div class="mb-8" data-aos="fade-up">
   <h1 class="text-4xl font-bold mb-2">
     Welcome back, <span class="text-gradient">{{ user.username }}</span>!
   </h1>
@@ -15,7 +15,7 @@
 <!-- Stats Grid -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
   <!-- Stat Card 1 -->
-  <div class="card glass-panel animate-slide-up stagger-1 p-6 relative overflow-hidden group">
+  <div class="card glass-panel p-6 relative overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
     <div
       class="absolute top-0 right-0 p-4 opacity-10 transform group-hover:scale-110 transition-transform duration-500">
       <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24" style="color: var(--brand-primary);">
@@ -34,7 +34,7 @@
   </div>
 
   <!-- Stat Card 2 -->
-  <div class="card glass-panel animate-slide-up stagger-2 p-6 relative overflow-hidden group">
+  <div class="card glass-panel p-6 relative overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
     <div
       class="absolute top-0 right-0 p-4 opacity-10 transform group-hover:scale-110 transition-transform duration-500">
       <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24" style="color: var(--brand-secondary);">
@@ -50,7 +50,7 @@
   </div>
 
   <!-- Stat Card 3 -->
-  <div class="card glass-panel animate-slide-up stagger-3 p-6 relative overflow-hidden group">
+  <div class="card glass-panel p-6 relative overflow-hidden group" data-aos="fade-up" data-aos-delay="300">
     <div
       class="absolute top-0 right-0 p-4 opacity-10 transform group-hover:scale-110 transition-transform duration-500">
       <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24" style="color: var(--brand-accent);">
@@ -71,7 +71,7 @@
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
   <!-- Quick Actions -->
-  <div class="lg:col-span-2 space-y-6 animate-slide-up stagger-4">
+  <div class="lg:col-span-2 space-y-6" data-aos="fade-up" data-aos-delay="400">
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-2xl font-bold">Quick Actions</h2>
     </div>
@@ -180,7 +180,7 @@
   </div>
 
   <!-- Sidebar / Profile Card -->
-  <div class="animate-slide-up stagger-4">
+  <div data-aos="fade-left" data-aos-delay="500">
     <div class="card p-6 text-center sticky top-24">
       <div
         class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-secondary)] p-1 mb-4">

@@ -1,120 +1,116 @@
 {% extends 'base.html' %}
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
-  <div class="max-w-6xl mx-auto">
-    <!-- What We Do Section -->
-    <div class="mb-16">
-      <div class="text-center mb-8">
-        <h1 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--text-primary);">WHAT WE DO</h1>
+<!-- What We Do Section -->
+<section class="min-h-screen flex items-center justify-center py-12 relative" data-aos="fade-up">
+  <div class="max-w-6xl mx-auto px-4 w-full">
+    <div class="text-center mb-8 md:mb-12">
+      <h1 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6" style="color: var(--text-primary);">WHAT WE DO</h1>
+      <div class="h-1 w-24 bg-[var(--brand-primary)] mx-auto rounded-full"></div>
+    </div>
+    
+    <div class="rounded-2xl p-6 md:p-10 shadow-xl backdrop-blur-sm" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
+      <div class="space-y-6 text-base md:text-lg leading-relaxed" style="color: var(--text-secondary);">
+        <p>
+          HappYness Project Philippines is a charitable organization that began in December 2018 with the aim of improving the quality of life in local communities. It is a non-governmental organization that has received recognition from the Bureau of Internal Revenue (BIR) and the Securities and Exchange Commission (SEC), allowing it to implement its action plan for community improvement.
+        </p>
+        
+        <p>
+          The organization provides assistance to underserved communities by supplying them with meals, education-related initiatives, groceries, shoes, slippers, school supplies, and other essentials. HappYness Project Philippines has conducted close to 1,000 outreach activities, offering support to various institutions such as hospitals, fire protection stations, orphanages, public schools, elderly homes, and 80+ indigent communities all over the Philippines.
+        </p>
       </div>
       
-      <div class="rounded-2xl p-8 md:p-12 shadow-lg" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
-        <div class="space-y-6 text-base md:text-lg leading-relaxed" style="color: var(--text-secondary);">
-          <p>
-            HappYness Project Philippines is a charitable organization that began in December 2018 with the aim of improving the quality of life in local communities. It is a non-governmental organization that has received recognition from the Bureau of Internal Revenue (BIR) and the Securities and Exchange Commission (SEC), allowing it to implement its action plan for community improvement.
-          </p>
-          
-          <p>
-            The organization provides assistance to underserved communities by supplying them with meals, education-related initiatives, groceries, shoes, slippers, school supplies, and other essentials. HappYness Project Philippines has conducted close to 1,000 outreach activities, offering support to various institutions such as hospitals, fire protection stations, orphanages, public schools, elderly homes, and 80+ indigent communities all over the Philippines.
-          </p>
+      <!-- Stats Section -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 md:mt-12 pt-8" style="border-top: 1px solid var(--card-border);">
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-bold mb-2 text-green-500">1,000+</div>
+          <div class="text-sm md:text-base" style="color: var(--text-secondary);">Outreach Activities</div>
         </div>
-        
-        <!-- Stats Section -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 pt-8" style="border-top: 1px solid var(--card-border);">
-          <div class="text-center">
-            <div class="text-3xl md:text-4xl font-bold mb-2 text-green-500">1,000+</div>
-            <div class="text-sm md:text-base" style="color: var(--text-secondary);">Outreach Activities</div>
-          </div>
-          <div class="text-center">
-            <div class="text-3xl md:text-4xl font-bold mb-2 text-green-500">80+</div>
-            <div class="text-sm md:text-base" style="color: var(--text-secondary);">Indigent Communities</div>
-          </div>
-          <div class="text-center">
-            <div class="text-3xl md:text-4xl font-bold mb-2 text-green-500">2018</div>
-            <div class="text-sm md:text-base" style="color: var(--text-secondary);">Year Established</div>
-          </div>
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-bold mb-2 text-green-500">80+</div>
+          <div class="text-sm md:text-base" style="color: var(--text-secondary);">Indigent Communities</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-bold mb-2 text-green-500">2018</div>
+          <div class="text-sm md:text-base" style="color: var(--text-secondary);">Year Established</div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Mission & Vision Section -->
-    <div class="mb-12">
-      <!-- Header -->
-      <div class="text-center mb-12">
-        <h1 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--text-primary);">Our Mission & Vision</h1>
-        <p class="text-lg" style="color: var(--text-secondary);">Guiding principles that drive our commitment to building happier, more sustainable communities worldwide.</p>
-      </div>
+<!-- Mission & Vision Section -->
+<section class="min-h-screen flex items-center justify-center py-12 relative" data-aos="fade-up">
+  <div class="max-w-7xl mx-auto px-4 w-full">
+    <div class="text-center mb-8 md:mb-12">
+      <h1 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6" style="color: var(--text-primary);">OUR GUIDING PRINCIPLES</h1>
+      <div class="h-1 w-24 bg-[var(--brand-primary)] mx-auto rounded-full"></div>
+    </div>
 
-    <!-- Mission & Vision Cards -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-      <!-- Our Mission Card (Light) -->
-      <div class="rounded-2xl p-8 shadow-lg" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
-        <!-- Icon & Title -->
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center">
-            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+      <!-- Mission Card -->
+      <div class="rounded-2xl p-6 md:p-10 shadow-xl backdrop-blur-sm h-full flex flex-col" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
+        <div class="flex flex-col items-center text-center mb-6 md:mb-8">
+          <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg transform -rotate-3">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
           </div>
-          <h2 class="text-2xl font-bold" style="color: var(--text-primary);">Our Mission</h2>
+          <h2 class="text-2xl md:text-3xl font-bold" style="color: var(--text-primary);">Our Mission</h2>
         </div>
 
-        <!-- Mission Text -->
-        <p class="text-base leading-relaxed mb-6" style="color: var(--text-secondary);">
+        <p class="text-base leading-relaxed mb-6 md:mb-8 text-center flex-grow" style="color: var(--text-secondary);">
           The HappYness Project is dedicated to making helping easy by creating sustainable programs that nurture the heart, uplift lives, and build inclusive communities. Through our core programs — HappY Hearts, HappY Nanays, and HappY Kids — we champion acts of kindness that promote holistic well-being, social empowerment, and lasting change for those most in need.
         </p>
 
-        <!-- Mission Bullet Points -->
         <ul class="space-y-3">
-          <li class="flex items-start gap-3">
-            <span class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
-            <span class="text-sm" style="color: var(--text-secondary);">Empower communities through sustainable initiatives</span>
+          <li class="flex items-center gap-3 p-3 rounded-lg" style="background-color: var(--bg-secondary);">
+            <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
+            <span class="text-base" style="color: var(--text-primary);">Empower communities through sustainable initiatives</span>
           </li>
-          <li class="flex items-start gap-3">
-            <span class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
-            <span class="text-sm" style="color: var(--text-secondary);">Foster inclusive and supportive environments</span>
+          <li class="flex items-center gap-3 p-3 rounded-lg" style="background-color: var(--bg-secondary);">
+            <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
+            <span class="text-base" style="color: var(--text-primary);">Foster inclusive and supportive environments</span>
           </li>
-          <li class="flex items-start gap-3">
-            <span class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
-            <span class="text-sm" style="color: var(--text-secondary);">Drive positive change through collective action</span>
+          <li class="flex items-center gap-3 p-3 rounded-lg" style="background-color: var(--bg-secondary);">
+            <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
+            <span class="text-base" style="color: var(--text-primary);">Drive positive change through collective action</span>
           </li>
         </ul>
       </div>
 
-      <!-- Our Vision Card (Theme-aware) -->
-      <div class="rounded-2xl p-8 shadow-lg" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
-        <!-- Icon & Title -->
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center">
-            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <!-- Vision Card -->
+      <div class="rounded-2xl p-6 md:p-10 shadow-xl backdrop-blur-sm h-full flex flex-col" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
+        <div class="flex flex-col items-center text-center mb-6 md:mb-8">
+          <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg transform rotate-3">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
             </svg>
           </div>
-          <h2 class="text-2xl font-bold" style="color: var(--text-primary);">Our Vision</h2>
+          <h2 class="text-2xl md:text-3xl font-bold" style="color: var(--text-primary);">Our Vision</h2>
         </div>
 
-        <!-- Vision Text -->
-        <p class="text-base leading-relaxed mb-6" style="color: var(--text-secondary);">
+        <p class="text-base leading-relaxed mb-6 md:mb-8 text-center flex-grow" style="color: var(--text-secondary);">
           A world where kindness is a way of life — empowering communities to grow in love, compassion, and shared happiness.
         </p>
 
-        <!-- Vision Bullet Points -->
         <ul class="space-y-3">
-          <li class="flex items-start gap-3">
-            <span class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
-            <span class="text-sm" style="color: var(--text-secondary);">Universal access to well-being and opportunity</span>
+          <li class="flex items-center gap-3 p-3 rounded-lg" style="background-color: var(--bg-secondary);">
+            <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
+            <span class="text-base" style="color: var(--text-primary);">Universal access to well-being and opportunity</span>
           </li>
-          <li class="flex items-start gap-3">
-            <span class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
-            <span class="text-sm" style="color: var(--text-secondary);">Harmony between humanity and the environment</span>
+          <li class="flex items-center gap-3 p-3 rounded-lg" style="background-color: var(--bg-secondary);">
+            <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
+            <span class="text-base" style="color: var(--text-primary);">Harmony between humanity and the environment</span>
           </li>
-          <li class="flex items-start gap-3">
-            <span class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
-            <span class="text-sm" style="color: var(--text-secondary);">Legacy of hope for future generations</span>
+          <li class="flex items-center gap-3 p-3 rounded-lg" style="background-color: var(--bg-secondary);">
+            <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
+            <span class="text-base" style="color: var(--text-primary);">Legacy of hope for future generations</span>
           </li>
         </ul>
       </div>
     </div>
   </div>
+</section>
 {% endblock %}

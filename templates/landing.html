@@ -11,7 +11,7 @@
   </div>
   <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
     <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div class="space-y-8 text-center md:text-left animate-slide-up">
+      <div class="space-y-8 text-center md:text-left" data-aos="fade-up">
         <h1 class="text-5xl md:text-6xl font-bold leading-tight tracking-tight" style="color: var(--text-primary);">
           Empowering Communities,<br>
           <span
@@ -35,22 +35,49 @@
           <a href="{% url 'about' %}" class="btn btn-outline text-lg px-8 py-4">Learn More</a>
         </div>
       </div>
-      <div class="relative hidden md:block animate-scale-in stagger-2">
-        <div
-          class="absolute inset-0 bg-gradient-to-tr from-[var(--brand-primary)] to-[var(--brand-secondary)] rounded-2xl opacity-20 blur-2xl transform rotate-3">
-        </div>
-        <div
-          class="relative rounded-2xl overflow-hidden shadow-2xl border border-[var(--card-border)] bg-[var(--card-bg)] p-2 glass">
-          <div
-            class="aspect-video rounded-xl bg-gradient-to-br from-[var(--bg-secondary)] to-[var(--bg-primary)] flex items-center justify-center overflow-hidden relative">
-            <div class="absolute inset-0 opacity-10"
-              style="background-image: radial-gradient(var(--text-muted) 1px, transparent 1px); background-size: 20px 20px;">
+      <!-- Photo Gallery Card -->
+      <div class="relative hidden md:block" data-aos="zoom-in" data-aos-delay="200">
+        <div class="absolute inset-0 bg-gradient-to-tr from-[var(--brand-primary)] to-[var(--brand-secondary)] rounded-2xl opacity-20 blur-2xl transform rotate-3"></div>
+        <div class="w-full max-w-[600px] h-[400px]" style="perspective: 1000px;">
+          <div class="gallery-container w-full h-full transform rotate-2 transition-transform duration-500 hover:rotate-0">
+            <div class="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl" 
+                 style="background: linear-gradient(to bottom right, var(--bg-secondary), var(--card-bg)); box-shadow: 0 25px 50px -12px var(--card-shadow), 0 0 0 1px var(--card-border);">
+              <div class="slides-container relative w-full h-full" id="slidesContainer">
+                <div class="slide absolute inset-0 opacity-0 transform translate-x-full scale-110 transition-all duration-1000 ease-out active" data-index="0">
+                  <img src="https://images.unsplash.com/photo-1706806595208-0e823368f240?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21tdW5pdHklMjB2b2x1bnRlZXJzfGVufDF8fHx8MTc2NDc1MTY1MXww&ixlib=rb-4.1.0&q=80&w=1080" alt="Community volunteers" class="w-full h-full object-cover">
+                  <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent, rgba(0, 0, 0, 0.2));"></div>
+                </div>
+                <div class="slide absolute inset-0 opacity-0 transform translate-x-full scale-110 transition-all duration-1000 ease-out" data-index="1">
+                  <img src="https://images.unsplash.com/photo-1461532257246-777de18cd58b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwZW9wbGUlMjBoZWxwaW5nfGVufDF8fHx8MTc2NDc1MTY1Mnww&ixlib=rb-4.1.0&q=80&w=1080" alt="People helping" class="w-full h-full object-cover">
+                  <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent, rgba(0, 0, 0, 0.2));"></div>
+                </div>
+                <div class="slide absolute inset-0 opacity-0 transform translate-x-full scale-110 transition-all duration-1000 ease-out" data-index="2">
+                  <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21tdW5pdHklMjBzZXJ2aWNlfGVufDF8fHx8MTc2NDc1MTY1Mnww&ixlib=rb-4.1.0&q=80&w=1080" alt="Community service" class="w-full h-full object-cover">
+                  <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent, rgba(0, 0, 0, 0.2));"></div>
+                </div>
+                <div class="slide absolute inset-0 opacity-0 transform translate-x-full scale-110 transition-all duration-1000 ease-out" data-index="3">
+                  <img src="https://images.unsplash.com/photo-1628717341663-0007b0ee2597?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2b2x1bnRlZXIlMjB3b3JrfGVufDF8fHx8MTc2NDcyMTcxNnww&ixlib=rb-4.1.0&q=80&w=1080" alt="Volunteer work" class="w-full h-full object-cover">
+                  <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent, rgba(0, 0, 0, 0.2));"></div>
+                </div>
+              </div>
+
+              <div class="nav-controls absolute top-1/2 left-0 right-0 -translate-y-1/2 flex justify-between px-4 opacity-0 hover:opacity-100 transition-opacity duration-300 z-10">
+                <button id="prevBtn" aria-label="Previous image" 
+                        class="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 shadow-md"
+                        style="background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); border: none;">
+                  <svg viewBox="0 0 24 24" class="w-6 h-6 stroke-white stroke-2 fill-none">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <button id="nextBtn" aria-label="Next image"
+                        class="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 shadow-md"
+                        style="background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); border: none;">
+                  <svg viewBox="0 0 24 24" class="w-6 h-6 stroke-white stroke-2 fill-none">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
             </div>
-            <svg class="w-32 h-32 text-[var(--brand-primary)] opacity-80" fill="none" stroke="currentColor"
-              viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
           </div>
         </div>
       </div>

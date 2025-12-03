@@ -130,3 +130,22 @@ button:hover { filter: brightness(1.1); }
   .nav-links { grid-column: 1 / -1; justify-content: center; }
   .hero { grid-template-columns: 1fr; }
 }
+
+/* ==========================================================================
+   Photo Gallery Slide States (minimal CSS for JS-driven transitions)
+   ========================================================================== */
+
+.slide.active {
+  opacity: 1 !important;
+  transform: translateX(0) scale(1) !important;
+}
+
+.slide.prev {
+  opacity: 0 !important;
+  transform: translateX(-100%) scale(0.95) !important;
+}
+
+/* Show nav controls on gallery hover */
+.gallery-container:hover .nav-controls {
+  opacity: 1;
+}
