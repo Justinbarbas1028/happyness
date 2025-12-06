@@ -1,8 +1,130 @@
 {% extends 'base.html' %}
-{% block title %}{{ title }}{% endblock %}
+{% block title %}FAQs - Happyness{% endblock %}
 {% block content %}
-  <div class="card">
-    <h1 class="text-2xl font-bold" style="color: var(--brand-primary);">FAQs</h1>
-    <p class="text-secondary mt-2">Frequently asked questions will appear here.</p>
+<div class="max-w-3xl mx-auto">
+  <!-- Header -->
+  <div class="text-center mb-8" data-aos="fade-up">
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--text-primary);">
+      Frequently Asked Questions
+    </h1>
+    <p style="color: var(--text-secondary);">
+      Find answers to common questions about HappyNess
+    </p>
   </div>
+
+  <!-- FAQ List -->
+  <div class="space-y-3" data-aos="fade-up" data-aos-delay="100">
+
+    <!-- FAQ 1 -->
+    <div class="faq-item card p-0">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>What is HappyNess?</span>
+        <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+      <div class="faq-answer">
+        <p>HappyNess is a community-focused platform that connects volunteers with meaningful opportunities. Track your
+          impact, join communities, and make a difference in your local area.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 2 -->
+    <div class="faq-item card p-0">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>How do I log my volunteer hours?</span>
+        <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+      <div class="faq-answer">
+        <p>Once logged in, navigate to the Home page and click "Log Volunteer Hours" in the Quick Actions section. You
+          can enter the activity details, duration, and the community it's associated with.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 3 -->
+    <div class="faq-item card p-0">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Can I join multiple communities?</span>
+        <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+      <div class="faq-answer">
+        <p>Yes! You can join as many communities as you like. Each community tracks your contributions separately, and
+          you can view your total impact across all communities on your profile.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 4 -->
+    <div class="faq-item card p-0">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>How do I reset my password?</span>
+        <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+      <div class="faq-answer">
+        <p>Click "Forgot password?" on the login page. Enter your email address and we'll send you a link to reset your
+          password. Check your spam folder if you don't see it within a few minutes.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 5 -->
+    <div class="faq-item card p-0">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Is my data secure?</span>
+        <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+      <div class="faq-answer">
+        <p>Absolutely. We use industry-standard security practices including encrypted passwords, CSRF protection, and
+          secure sessions. Your personal information is never shared without your consent.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 6 -->
+    <div class="faq-item card p-0">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>How do I switch between light and dark mode?</span>
+        <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+      <div class="faq-answer">
+        <p>Click the sun/moon icon in the bottom-right corner of any page. Your preference is saved automatically and
+          will persist across sessions.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Contact Section -->
+  <div class="card mt-8 text-center" data-aos="fade-up" data-aos-delay="200">
+    <h3 class="text-lg font-bold mb-2" style="color: var(--text-primary);">Still have questions?</h3>
+    <p class="mb-4" style="color: var(--text-secondary);">We're here to help!</p>
+    <a href="mailto:support@happyness.com" class="btn btn-primary">
+      Contact Support
+    </a>
+  </div>
+</div>
+
+<script>
+  function toggleFaq(element) {
+    const faqItem = element.parentElement;
+    const isOpen = faqItem.classList.contains('open');
+
+    // Close all other FAQs
+    document.querySelectorAll('.faq-item.open').forEach(item => {
+      if (item !== faqItem) {
+        item.classList.remove('open');
+      }
+    });
+
+    // Toggle current FAQ
+    faqItem.classList.toggle('open');
+  }
+</script>
 {% endblock %}
