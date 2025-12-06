@@ -50,7 +50,7 @@
           </td>
           <td class="px-5 py-4 text-sm hidden sm:table-cell" style="color: var(--text-secondary);">{{ u.email|default:"-" }}</td>
           <td class="px-5 py-4 text-sm hidden md:table-cell" style="color: var(--text-secondary);">{{ u.date_joined|date:"M d, Y" }}</td>
-          <td class="px-5 py-4">
+          <td class="px-5 py-4" id="user-status-{{ u.id }}">
             {% if u.is_active %}
             <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
               <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
@@ -74,6 +74,17 @@
           </td>
           <td class="px-5 py-4 text-right">
             <div class="flex items-center justify-end gap-2">
+              {% if user != u %}
+              <button hx-post="{% url 'toggle_user_status' u.id %}" 
+                      hx-target="#user-status-{{ u.id }}"
+                      hx-swap="innerHTML"
+                      class="p-2 rounded-lg transition-colors hover:bg-[var(--bg-secondary)] text-gray-500 hover:text-[var(--brand-secondary)]" 
+                      title="Toggle Active Status">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                </svg>
+              </button>
+              {% endif %}
               <a href="/admin/auth/user/{{ u.id }}/change/" target="_blank" 
                  class="p-2 rounded-lg transition-colors hover:bg-[var(--bg-secondary)]" 
                  style="color: var(--text-secondary);" title="Edit User">
@@ -102,19 +113,19 @@
 <!-- Stats Summary -->
 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6" data-aos="fade-up" data-aos-delay="200">
   <div class="card p-4 text-center">
-    <p class="text-2xl font-bold" style="color: var(--text-primary);">{{ users|length }}</p>
+    <p class="text-2xl font-bold" style="color: var(--text-primary);">{{ total_users }}</p>
     <p class="text-xs" style="color: var(--text-muted);">Total Users</p>
   </div>
   <div class="card p-4 text-center">
-    <p class="text-2xl font-bold text-green-600">{% for u in users %}{% if u.is_active %}{% with active_count=active_count|default:0|add:1 %}{% endwith %}{% endif %}{% endfor %}{{ users|length }}</p>
+    <p class="text-2xl font-bold text-green-600"><span id="active-users-count">{{ active_users }}</span></p>
     <p class="text-xs" style="color: var(--text-muted);">Active</p>
   </div>
   <div class="card p-4 text-center">
-    <p class="text-2xl font-bold text-purple-600">{% for u in users %}{% if u.is_staff %}{% with staff_count=staff_count|default:0|add:1 %}{% endwith %}{% endif %}{% endfor %}0</p>
+    <p class="text-2xl font-bold text-purple-600">{{ staff_users }}</p>
     <p class="text-xs" style="color: var(--text-muted);">Staff</p>
   </div>
   <div class="card p-4 text-center">
-    <p class="text-2xl font-bold text-blue-600">{% for u in users %}{% if u.is_superuser %}{% with super_count=super_count|default:0|add:1 %}{% endwith %}{% endif %}{% endfor %}0</p>
+    <p class="text-2xl font-bold text-blue-600">{{ superuser_count }}</p>
     <p class="text-xs" style="color: var(--text-muted);">Superusers</p>
   </div>
 </div>

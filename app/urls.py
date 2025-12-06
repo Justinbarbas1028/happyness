@@ -13,6 +13,7 @@ urlpatterns = [
     path('products/', views.products, name='products'),
     path('faqs/', views.faqs, name='faqs'),
     path('partners/', views.partners, name='partners'),
+    path('donate/', views.donate, name='donate'),
 
     # HTMX demo
     path('htmx/greeting/', views.htmx_greeting, name='htmx_greeting'),
@@ -25,6 +26,7 @@ urlpatterns = [
     # Admin Dashboard
     path('admin-panel/', views.admin_dashboard, name='admin_dashboard'),
     path('admin-panel/users/', views.admin_users, name='admin_users'),
+    path('admin-panel/users/<int:user_id>/toggle-status/', views.toggle_user_status, name='toggle_user_status'),
     path('admin-panel/analytics/', views.admin_analytics, name='admin_analytics'),
     path('admin-panel/settings/', views.admin_settings, name='admin_settings'),
 ]

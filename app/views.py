@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -37,6 +37,10 @@ def faqs(request):
 
 def partners(request):
 	return render(request, 'partners.html', {'title': 'Our Partners'})
+
+
+def donate(request):
+	return render(request, 'donate.html', {'title': 'Donate'})
 
 
 def htmx_greeting(request):
@@ -120,10 +124,60 @@ def admin_dashboard(request):
 def admin_users(request):
 	"""Admin user management"""
 	users = User.objects.all().order_by('-date_joined')
+	
+	# Optimized stats calculation
+	total_users = users.count()
+	active_users = users.filter(is_active=True).count()
+	staff_users = users.filter(is_staff=True).count()
+	superuser_count = users.filter(is_superuser=True).count()
+
 	return render(request, 'admin/users.html', {
 		'title': 'User Management',
 		'users': users,
+		'total_users': total_users,
+		'active_users': active_users,
+		'staff_users': staff_users,
+		'superuser_count': superuser_count,
 	})
+
+
+@login_required
+@user_passes_test(is_admin, login_url='/home/')
+@require_POST
+def toggle_user_status(request, user_id):
+	"""Toggle user active status via HTMX"""
+	user = get_object_or_404(User, id=user_id)
+	
+	# Prevent modifying self
+	if user == request.user:
+		return HttpResponse(status=403)
+		
+	user.is_active = not user.is_active
+	user.save()
+	
+	# Get updated active count for OOB swap
+	active_users = User.objects.filter(is_active=True).count()
+	
+	# Render the status badge
+	if user.is_active:
+		status_html = '''
+		<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+			<span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
+			Active
+		</span>
+		'''
+	else:
+		status_html = '''
+		<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+			<span class="w-1.5 h-1.5 bg-red-500 rounded-full mr-1.5"></span>
+			Inactive
+		</span>
+		'''
+		
+	# Add OOB swap for the counter
+	oob_html = f'<span id="active-users-count" hx-swap-oob="true">{active_users}</span>'
+	
+	return HttpResponse(status_html + oob_html)
 
 
 @login_required
