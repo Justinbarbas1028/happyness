@@ -21,78 +21,65 @@
     </div>
 
     <!-- Login Form -->
-  <div class="rounded-xl p-8" style="background-color: var(--card-bg); border: 1px solid var(--card-border); backdrop-filter: blur(10px);">
-      <form 
-        method="post" 
-        action="{% url 'account_login' %}"
-        class="space-y-6"
-      >
+    <div class="rounded-xl p-8"
+      style="background-color: var(--card-bg); border: 1px solid var(--card-border); backdrop-filter: blur(10px);">
+      <form method="post" action="{% url 'account_login' %}" class="space-y-6">
         {% csrf_token %}
-        
+
         {% if form.non_field_errors %}
-          <div class="rounded-md bg-red-500/10 border border-red-500/30 p-4">
-            <div class="flex">
-              <div class="flex-shrink-0">
-                <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-                </svg>
-              </div>
-              <div class="ml-3">
-                <p class="text-sm text-red-300">
-                  {{ form.non_field_errors.0 }}
-                </p>
-              </div>
+        <div class="rounded-md bg-red-500/10 border border-red-500/30 p-4">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                  clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm text-red-300">
+                {{ form.non_field_errors.0 }}
+              </p>
             </div>
           </div>
+        </div>
         {% endif %}
 
         <div class="space-y-4">
           <!-- Username/Email Field -->
           <div>
-            <label for="{{ form.login.id_for_label }}" class="block text-sm font-medium mb-2" style="color: var(--text-primary);">
+            <label for="{{ form.login.id_for_label }}" class="block text-sm font-medium mb-2"
+              style="color: var(--text-primary);">
               Username or Email
             </label>
-            <input
-              type="text"
-              name="{{ form.login.name }}"
-              id="{{ form.login.id_for_label }}"
-              value="{{ form.login.value|default:'' }}"
-              required
+            <input type="text" name="{{ form.login.name }}" id="{{ form.login.id_for_label }}"
+              value="{{ form.login.value|default:'' }}" required
               class="appearance-none rounded-lg relative block w-full px-3 py-2.5 transition focus:outline-none focus:ring-2"
               style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary);"
-              placeholder="Enter your username or email"
-              hx-post="{% url 'validate_field' %}"
-              hx-trigger="blur"
-              hx-target="#login-error"
-              hx-swap="innerHTML"
-              hx-include="[name='csrfmiddlewaretoken']"
-            >
+              placeholder="Enter your username or email" hx-post="{% url 'validate_field' %}" hx-trigger="blur"
+              hx-target="#login-error" hx-swap="innerHTML" hx-include="[name='csrfmiddlewaretoken']">
             {% if form.login.errors %}
-              <p class="mt-2 text-sm text-red-400">
-                {{ form.login.errors.0 }}
-              </p>
+            <p class="mt-2 text-sm text-red-400">
+              {{ form.login.errors.0 }}
+            </p>
             {% endif %}
           </div>
 
           <!-- Password Field -->
           <div>
-            <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium mb-2" style="color: var(--text-primary);">
+            <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium mb-2"
+              style="color: var(--text-primary);">
               Password
             </label>
-            <input
-              type="password"
-              name="{{ form.password.name }}"
-              id="{{ form.password.id_for_label }}"
-              value="{{ form.password.value|default:'' }}"
-              required
+            <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}"
+              value="{{ form.password.value|default:'' }}" required
               class="appearance-none rounded-lg relative block w-full px-3 py-2.5 transition focus:outline-none focus:ring-2"
               style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary);"
-              placeholder="Enter your password"
-            >
+              placeholder="Enter your password">
             {% if form.password.errors %}
-              <p class="mt-2 text-sm text-red-400">
-                {{ form.password.errors.0 }}
-              </p>
+            <p class="mt-2 text-sm text-red-400">
+              {{ form.password.errors.0 }}
+            </p>
             {% endif %}
           </div>
 
@@ -103,21 +90,18 @@
         <!-- Remember Me & Forgot Password -->
         <div class="flex items-center justify-between">
           <div class="flex items-center">
-            <input
-              id="{{ form.remember.id_for_label }}"
-              name="{{ form.remember.name }}"
-              type="checkbox"
-              {% if form.remember.value %}checked{% endif %}
-              class="h-4 w-4 rounded focus:ring-offset-0"
-              style="background-color: var(--input-bg); border: 1px solid var(--input-border); accent-color: var(--brand-secondary);"
-            >
-            <label for="{{ form.remember.id_for_label }}" class="ml-2 block text-sm" style="color: var(--text-secondary);">
+            <input id="{{ form.remember.id_for_label }}" name="{{ form.remember.name }}" type="checkbox" {% if
+              form.remember.value %}checked{% endif %} class="h-4 w-4 rounded focus:ring-offset-0"
+              style="background-color: var(--input-bg); border: 1px solid var(--input-border); accent-color: var(--brand-secondary);">
+            <label for="{{ form.remember.id_for_label }}" class="ml-2 block text-sm"
+              style="color: var(--text-secondary);">
               Remember me
             </label>
           </div>
 
           <div class="text-sm">
-            <a href="{% url 'account_reset_password' %}" class="font-medium transition" style="color: var(--brand-secondary);">
+            <a href="{% url 'account_reset_password' %}" class="font-medium transition"
+              style="color: var(--brand-secondary);">
               Forgot password?
             </a>
           </div>
@@ -125,44 +109,57 @@
 
         <!-- Submit Button -->
         <div>
-          <button
-            type="submit"
+          <button type="submit" id="login-submit"
             class="group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-semibold rounded-lg text-white focus:outline-none transition"
-            style="background-color: var(--button-secondary);"
-          >
+            style="background-color: var(--button-secondary);">
             Sign in
           </button>
         </div>
 
         <!-- Redirect Field -->
         {% if redirect_field_value %}
-          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
       </form>
 
       <!-- Social Auth (Optional) -->
       {% if providers %}
-        <div class="mt-6">
-          <div class="relative">
-            <div class="absolute inset-0 flex items-center">
-              <div class="w-full" style="border-top: 1px solid var(--card-border);"></div>
-            </div>
-            <div class="relative flex justify-center text-sm">
-              <span class="px-2" style="background: transparent; color: var(--text-secondary);">Or continue with</span>
-            </div>
+      <div class="mt-6">
+        <div class="relative">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full" style="border-top: 1px solid var(--card-border);"></div>
           </div>
-
-          <div class="mt-6 grid grid-cols-2 gap-3">
-            {% for provider in providers %}
-              <a href="{% provider_login_url provider.id %}" class="w-full inline-flex justify-center py-2 px-4 rounded-lg text-sm font-medium transition"
-                 style="background-color: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-primary);">
-                {{ provider.name }}
-              </a>
-            {% endfor %}
+          <div class="relative flex justify-center text-sm">
+            <span class="px-2" style="background: transparent; color: var(--text-secondary);">Or continue with</span>
           </div>
         </div>
+
+        <div class="mt-6 grid grid-cols-2 gap-3">
+          {% for provider in providers %}
+          <a href="{% provider_login_url provider.id %}"
+            class="w-full inline-flex justify-center py-2 px-4 rounded-lg text-sm font-medium transition"
+            style="background-color: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-primary);">
+            {{ provider.name }}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
       {% endif %}
     </div>
   </div>
 </div>
+
+<script>
+  // Form Loading State
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+    const submitBtn = document.getElementById('login-submit');
+
+    form.addEventListener('submit', function () {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner"></span> Signing in...';
+      submitBtn.classList.add('opacity-75');
+    });
+  });
+</script>
 {% endblock %}
