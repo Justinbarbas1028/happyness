@@ -3,7 +3,7 @@
  * Handles light/dark mode switching with localStorage persistence
  */
 
-(function() {
+(function () {
   'use strict';
 
   // Constants
@@ -30,7 +30,7 @@
     } else {
       document.documentElement.removeAttribute('data-theme');
     }
-    
+
     localStorage.setItem(THEME_KEY, theme);
     updateToggleIcon(theme);
   }
@@ -63,25 +63,32 @@
     }
   }
 
+  // Handle toggle click
+  function handleToggleClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleTheme();
+  }
+
   // Initialize theme logic
   function initTheme() {
-    // 1. Set initial theme (idempotent)
+    // 1. Set initial theme
     const storedTheme = getStoredTheme();
     setTheme(storedTheme);
 
     // 2. Attach event listener to toggle button
-    // This needs to happen every time the button is re-rendered (e.g. HTMX swap)
     const toggleBtn = document.getElementById('themeToggle');
     if (toggleBtn) {
-      // Remove old listener to be safe (though replacing element removes it anyway)
-      toggleBtn.removeEventListener('click', handleToggleClick);
-      toggleBtn.addEventListener('click', handleToggleClick);
-    }
-  }
+      // Clone and replace to remove any old listeners
+      const newToggleBtn = toggleBtn.cloneNode(true);
+      toggleBtn.parentNode.replaceChild(newToggleBtn, toggleBtn);
 
-  function handleToggleClick(e) {
-    e.preventDefault();
-    toggleTheme();
+      // Add fresh listener
+      newToggleBtn.addEventListener('click', handleToggleClick);
+
+      // Update icon for the new button
+      updateToggleIcon(storedTheme);
+    }
   }
 
   // Run immediately to prevent flash (if script is in head)
@@ -90,15 +97,20 @@
     document.documentElement.setAttribute('data-theme', THEME_DARK);
   }
 
-  // Initialize on load and after HTMX swaps
-  if (typeof htmx !== 'undefined') {
-    htmx.onLoad(initTheme);
-  } else {
-    // Fallback if HTMX isn't loaded yet
+  // Initialize on DOMContentLoaded (most reliable)
+  if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initTheme);
+  } else {
+    // DOM already loaded
+    initTheme();
   }
+
+  // Also reinitialize after HTMX swaps
+  document.body.addEventListener('htmx:afterSwap', initTheme);
+  document.body.addEventListener('htmx:afterSettle', initTheme);
 
   // Expose toggle function globally
   window.toggleTheme = toggleTheme;
-  
+  window.initTheme = initTheme;
+
 })();
