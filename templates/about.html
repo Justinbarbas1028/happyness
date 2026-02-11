@@ -1,374 +1,38 @@
 {% extends 'base.html' %}
-{% load static %}
 {% block title %}{{ title }}{% endblock %}
-{% block main_class %}{% endblock %}
 {% block content %}
-
-<!-- Hero Section -->
-<section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-  <!-- Background gradient -->
-  <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 via-transparent to-blue-500/10"></div>
-  
-  <!-- Floating decorative elements -->
-  <div class="absolute top-20 left-10 w-64 h-64 bg-green-500/10 rounded-full blur-3xl animate-pulse"></div>
-  <div class="absolute bottom-20 right-10 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
-  <div class="absolute top-1/2 left-1/4 w-4 h-4 bg-green-500 rounded-full opacity-60" data-aos="fade-in" data-aos-delay="500"></div>
-  <div class="absolute top-1/3 right-1/3 w-3 h-3 bg-blue-400 rounded-full opacity-60" data-aos="fade-in" data-aos-delay="700"></div>
-  <div class="absolute bottom-1/3 left-1/3 w-5 h-5 bg-green-400 rounded-full opacity-40" data-aos="fade-in" data-aos-delay="900"></div>
-  
-  <div class="relative z-10 max-w-5xl mx-auto px-4 text-center" data-aos="fade-down">
-    <!-- Badge -->
-    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
-      <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-      <span class="text-sm font-medium" style="color: var(--text-secondary);">Established 2018</span>
-    </div>
-    
-    <!-- Main headline -->
-    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight" style="color: var(--text-primary);">
-      Spreading <span class="text-gradient">HappYness</span><br class="hidden sm:block"> Across the Philippines
-    </h1>
-    
-    <!-- Subheadline -->
-    <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8" style="color: var(--text-secondary);">
-      A charitable organization dedicated to improving lives, nurturing hearts, and building inclusive communities through sustainable programs and acts of kindness.
-    </p>
-    
-    <!-- Scroll indicator -->
-    <div class="flex flex-col items-center gap-2 mt-12" data-aos="fade-up" data-aos-delay="300">
-      <span class="text-sm" style="color: var(--text-muted);">Discover our story</span>
-      <div class="w-6 h-10 rounded-full border-2 flex justify-center pt-2" style="border-color: var(--card-border);">
-        <div class="w-1.5 h-3 bg-green-500 rounded-full animate-bounce"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- What We Do Section -->
-<section class="py-16 md:py-24 relative">
-  <div class="max-w-6xl mx-auto px-4">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <!-- Text Content -->
-      <div data-aos="fade-right">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium mb-4" style="background-color: rgba(57, 181, 74, 0.1); color: var(--brand-secondary);">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
-          </svg>
-          Our Purpose
-        </div>
-        
-        <h2 class="text-3xl md:text-4xl font-bold mb-6" style="color: var(--text-primary);">
-          What We Do
-        </h2>
-        
-        <div class="space-y-4 text-base md:text-lg leading-relaxed" style="color: var(--text-secondary);">
-          <p>
-            <strong style="color: var(--text-primary);">HappYness Project Philippines</strong> is a charitable organization that began in December 2018 with the aim of improving the quality of life in local communities.
-          </p>
-          <p>
-            As a registered non-governmental organization recognized by the <strong style="color: var(--text-primary);">Bureau of Internal Revenue (BIR)</strong> and the <strong style="color: var(--text-primary);">Securities and Exchange Commission (SEC)</strong>, we implement action plans for sustainable community improvement.
-          </p>
-          <p>
-            We provide assistance to underserved communities by supplying them with meals, education-related initiatives, groceries, shoes, slippers, school supplies, and other essentials across hospitals, fire protection stations, orphanages, public schools, elderly homes, and indigent communities.
-          </p>
-        </div>
-      </div>
-      
-      <!-- Illustration/Visual -->
-      <div class="relative" data-aos="fade-left" data-aos-delay="200">
-        <div class="relative rounded-3xl p-8 overflow-hidden" style="background: linear-gradient(135deg, rgba(57, 181, 74, 0.1) 0%, rgba(124, 172, 248, 0.1) 100%); border: 1px solid var(--card-border);">
-          <!-- Decorative SVG illustration -->
-          <svg class="w-full h-auto" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Background shapes -->
-            <circle cx="200" cy="150" r="100" fill="url(#grad1)" opacity="0.3"/>
-            <circle cx="320" cy="80" r="40" fill="url(#grad2)" opacity="0.2"/>
-            <circle cx="80" cy="220" r="50" fill="url(#grad2)" opacity="0.2"/>
-            
-            <!-- Central heart with hands -->
-            <path d="M200 220 L200 180" stroke="var(--brand-secondary)" stroke-width="4" stroke-linecap="round"/>
-            <circle cx="200" cy="140" r="50" fill="none" stroke="var(--brand-secondary)" stroke-width="3"/>
-            <path d="M200 120 C200 105, 215 100, 220 115 C225 100, 240 105, 240 120 C240 140, 200 160, 200 160 C200 160, 160 140, 160 120 C160 105, 175 100, 180 115 C185 100, 200 105, 200 120Z" fill="var(--brand-secondary)"/>
-            
-            <!-- Left hand -->
-            <path d="M120 180 C100 170, 90 150, 100 130 L110 140 C105 155, 110 165, 125 175 Z" fill="var(--brand-primary)" opacity="0.8"/>
-            <!-- Right hand -->
-            <path d="M280 180 C300 170, 310 150, 300 130 L290 140 C295 155, 290 165, 275 175 Z" fill="var(--brand-primary)" opacity="0.8"/>
-            
-            <!-- People silhouettes -->
-            <circle cx="100" cy="100" r="15" fill="var(--brand-primary)" opacity="0.6"/>
-            <path d="M85 130 Q100 145 115 130 L115 150 L85 150 Z" fill="var(--brand-primary)" opacity="0.6"/>
-            
-            <circle cx="300" cy="100" r="15" fill="var(--brand-secondary)" opacity="0.6"/>
-            <path d="M285 130 Q300 145 315 130 L315 150 L285 150 Z" fill="var(--brand-secondary)" opacity="0.6"/>
-            
-            <circle cx="150" cy="240" r="12" fill="var(--brand-primary)" opacity="0.5"/>
-            <circle cx="250" cy="240" r="12" fill="var(--brand-secondary)" opacity="0.5"/>
-            
-            <!-- Stars/sparkles -->
-            <path d="M50 80 L53 73 L56 80 L63 83 L56 86 L53 93 L50 86 L43 83 Z" fill="var(--brand-secondary)" opacity="0.7"/>
-            <path d="M340 200 L343 193 L346 200 L353 203 L346 206 L343 213 L340 206 L333 203 Z" fill="var(--brand-primary)" opacity="0.7"/>
-            <path d="M180 50 L182 45 L184 50 L189 52 L184 54 L182 59 L180 54 L175 52 Z" fill="var(--brand-secondary)" opacity="0.5"/>
-            
-            <defs>
-              <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:rgb(57, 181, 74);stop-opacity:1" />
-                <stop offset="100%" style="stop-color:rgb(124, 172, 248);stop-opacity:1" />
-              </linearGradient>
-              <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:rgb(124, 172, 248);stop-opacity:1" />
-                <stop offset="100%" style="stop-color:rgb(57, 181, 74);stop-opacity:1" />
-              </linearGradient>
-            </defs>
-          </svg>
-          
-          <!-- Floating badges -->
-          <div class="absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-semibold bg-green-500 text-white shadow-lg">
-            SEC Registered
-          </div>
-          <div class="absolute bottom-4 left-4 px-3 py-1.5 rounded-full text-xs font-semibold bg-blue-500 text-white shadow-lg">
-            BIR Recognized
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Impact Statistics Section -->
-<section class="py-16 md:py-24 relative overflow-hidden">
-  <!-- Background decoration -->
-  <div class="absolute inset-0 bg-gradient-to-r from-green-500/5 via-transparent to-blue-500/5"></div>
-  
-  <div class="max-w-6xl mx-auto px-4 relative z-10">
-    <div class="text-center mb-12" data-aos="fade-up">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--text-primary);">Our Impact</h2>
-      <p class="text-lg max-w-2xl mx-auto" style="color: var(--text-secondary);">
-        Numbers that reflect our commitment to spreading happiness and making a difference.
-      </p>
+<section class="min-h-screen flex items-center justify-center py-12 relative" data-aos="fade-up">
+  <div class="max-w-6xl mx-auto px-4 w-full">
+    <div class="text-center mb-8 md:mb-12">
+      <h1 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6" style="color: var(--text-primary);">WHAT WE DO</h1>
+      <div class="h-1 w-24 bg-[var(--brand-primary)] mx-auto rounded-full"></div>
     </div>
     
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-      <!-- Stat 1 -->
-      <div class="text-center p-6 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl" style="background-color: var(--card-bg); border: 1px solid var(--card-border);" data-aos="fade-up" data-aos-delay="0">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-lg">
-          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
-          </svg>
-        </div>
-        <div class="text-3xl md:text-4xl font-bold mb-1 text-green-500">1,000+</div>
-        <div class="text-sm md:text-base font-medium" style="color: var(--text-secondary);">Outreach Activities</div>
-      </div>
-      
-      <!-- Stat 2 -->
-      <div class="text-center p-6 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl" style="background-color: var(--card-bg); border: 1px solid var(--card-border);" data-aos="fade-up" data-aos-delay="100">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
-          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-          </svg>
-        </div>
-        <div class="text-3xl md:text-4xl font-bold mb-1 text-blue-500">80+</div>
-        <div class="text-sm md:text-base font-medium" style="color: var(--text-secondary);">Communities Served</div>
-      </div>
-      
-      <!-- Stat 3 -->
-      <div class="text-center p-6 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl" style="background-color: var(--card-bg); border: 1px solid var(--card-border);" data-aos="fade-up" data-aos-delay="200">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg">
-          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
-        </div>
-        <div class="text-3xl md:text-4xl font-bold mb-1 text-purple-500">2018</div>
-        <div class="text-sm md:text-base font-medium" style="color: var(--text-secondary);">Year Established</div>
-      </div>
-      
-      <!-- Stat 4 -->
-      <div class="text-center p-6 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl" style="background-color: var(--card-bg); border: 1px solid var(--card-border);" data-aos="fade-up" data-aos-delay="300">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center shadow-lg">
-          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-          </svg>
-        </div>
-        <div class="text-3xl md:text-4xl font-bold mb-1 text-pink-500">10,000+</div>
-        <div class="text-sm md:text-base font-medium" style="color: var(--text-secondary);">Lives Touched</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Timeline/Journey Section -->
-<section class="py-16 md:py-24 relative">
-  <div class="max-w-4xl mx-auto px-4">
-    <div class="text-center mb-12" data-aos="fade-up">
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium mb-4" style="background-color: rgba(124, 172, 248, 0.1); color: var(--brand-primary);">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-        </svg>
-        Our Journey
-      </div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--text-primary);">Growing Together Since 2018</h2>
-      <p class="text-lg max-w-2xl mx-auto" style="color: var(--text-secondary);">
-        Every milestone marks another step towards a happier Philippines.
-      </p>
-    </div>
-    
-    <!-- Timeline -->
-    <div class="relative">
-      <!-- Vertical line -->
-      <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-green-500 via-blue-500 to-purple-500 transform md:-translate-x-1/2"></div>
-      
-      <!-- Timeline items -->
-      <div class="space-y-8 md:space-y-12">
-        <!-- Item 1 -->
-        <div class="relative flex items-start md:items-center" data-aos="fade-up">
-          <div class="absolute left-4 md:left-1/2 w-4 h-4 bg-green-500 rounded-full transform -translate-x-1/2 ring-4" style="ring-color: var(--bg-primary);"></div>
-          <div class="ml-12 md:ml-0 md:w-1/2 md:pr-12 md:text-right">
-            <div class="p-5 rounded-2xl" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
-              <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-green-500 text-white mb-2">December 2018</span>
-              <h3 class="text-lg font-bold mb-1" style="color: var(--text-primary);">The Beginning</h3>
-              <p class="text-sm" style="color: var(--text-secondary);">HappYness Project Philippines was founded with a mission to spread happiness and improve lives in local communities.</p>
-            </div>
-          </div>
-        </div>
+    <div class="rounded-2xl p-6 md:p-10 shadow-xl backdrop-blur-sm" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
+      <div class="space-y-6 text-base md:text-lg leading-relaxed" style="color: var(--text-secondary);">
+        <p>
+          HappYness Project Philippines is a charitable organization that began in December 2018 with the aim of improving the quality of life in local communities. It is a non-governmental organization that has received recognition from the Bureau of Internal Revenue (BIR) and the Securities and Exchange Commission (SEC), allowing it to implement its action plan for community improvement.
+        </p>
         
-        <!-- Item 2 -->
-        <div class="relative flex items-start md:items-center" data-aos="fade-up" data-aos-delay="100">
-          <div class="absolute left-4 md:left-1/2 w-4 h-4 bg-blue-500 rounded-full transform -translate-x-1/2 ring-4" style="ring-color: var(--bg-primary);"></div>
-          <div class="ml-12 md:ml-auto md:w-1/2 md:pl-12">
-            <div class="p-5 rounded-2xl" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
-              <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-blue-500 text-white mb-2">2019</span>
-              <h3 class="text-lg font-bold mb-1" style="color: var(--text-primary);">First 100 Outreach Activities</h3>
-              <p class="text-sm" style="color: var(--text-secondary);">Reached a significant milestone of 100 successful outreach activities, touching thousands of lives.</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Item 3 -->
-        <div class="relative flex items-start md:items-center" data-aos="fade-up" data-aos-delay="200">
-          <div class="absolute left-4 md:left-1/2 w-4 h-4 bg-purple-500 rounded-full transform -translate-x-1/2 ring-4" style="ring-color: var(--bg-primary);"></div>
-          <div class="ml-12 md:ml-0 md:w-1/2 md:pr-12 md:text-right">
-            <div class="p-5 rounded-2xl" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
-              <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-purple-500 text-white mb-2">2020</span>
-              <h3 class="text-lg font-bold mb-1" style="color: var(--text-primary);">Pandemic Response</h3>
-              <p class="text-sm" style="color: var(--text-secondary);">Expanded support during COVID-19, providing essential supplies and relief to affected communities.</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Item 4 -->
-        <div class="relative flex items-start md:items-center" data-aos="fade-up" data-aos-delay="300">
-          <div class="absolute left-4 md:left-1/2 w-4 h-4 bg-pink-500 rounded-full transform -translate-x-1/2 ring-4" style="ring-color: var(--bg-primary);"></div>
-          <div class="ml-12 md:ml-auto md:w-1/2 md:pl-12">
-            <div class="p-5 rounded-2xl" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
-              <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-pink-500 text-white mb-2">2022</span>
-              <h3 class="text-lg font-bold mb-1" style="color: var(--text-primary);">Official Recognition</h3>
-              <p class="text-sm" style="color: var(--text-secondary);">Registered with SEC and recognized by BIR, establishing credibility and enabling greater impact.</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Item 5 -->
-        <div class="relative flex items-start md:items-center" data-aos="fade-up" data-aos-delay="400">
-          <div class="absolute left-4 md:left-1/2 w-4 h-4 bg-green-500 rounded-full transform -translate-x-1/2 ring-4" style="ring-color: var(--bg-primary);"></div>
-          <div class="ml-12 md:ml-0 md:w-1/2 md:pr-12 md:text-right">
-            <div class="p-5 rounded-2xl" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
-              <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-green-500 text-white mb-2">2024</span>
-              <h3 class="text-lg font-bold mb-1" style="color: var(--text-primary);">1,000+ Activities Milestone</h3>
-              <p class="text-sm" style="color: var(--text-secondary);">Surpassed 1,000 outreach activities across 80+ indigent communities nationwide.</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Item 6 - Present -->
-        <div class="relative flex items-start md:items-center" data-aos="fade-up" data-aos-delay="500">
-          <div class="absolute left-4 md:left-1/2 w-4 h-4 bg-gradient-to-r from-green-500 to-blue-500 rounded-full transform -translate-x-1/2 ring-4 animate-pulse" style="ring-color: var(--bg-primary);"></div>
-          <div class="ml-12 md:ml-auto md:w-1/2 md:pl-12">
-            <div class="p-5 rounded-2xl bg-gradient-to-r from-green-500/10 to-blue-500/10" style="border: 1px solid var(--card-border);">
-              <span class="inline-block px-3 py-1 rounded-full text-xs font-bold text-white mb-2" style="background: linear-gradient(135deg, #39b54a, #7cacf8);">Present</span>
-              <h3 class="text-lg font-bold mb-1" style="color: var(--text-primary);">Continuing the Mission</h3>
-              <p class="text-sm" style="color: var(--text-secondary);">Growing stronger every day, expanding our reach, and continuing to spread happiness across the Philippines.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Core Programs Section -->
-<section class="py-16 md:py-24 relative overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-green-500/5 to-transparent"></div>
-  
-  <div class="max-w-6xl mx-auto px-4 relative z-10">
-    <div class="text-center mb-12" data-aos="fade-up">
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium mb-4" style="background-color: rgba(57, 181, 74, 0.1); color: var(--brand-secondary);">
-        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
-        </svg>
-        What We Offer
-      </div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--text-primary);">Our Core Programs</h2>
-      <p class="text-lg max-w-2xl mx-auto" style="color: var(--text-secondary);">
-        Three pillars of impact designed to nurture hearts, uplift lives, and build inclusive communities.
-      </p>
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-      <!-- Program 1: HappY Hearts -->
-      <div class="group relative p-6 md:p-8 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2" style="background-color: var(--card-bg); border: 1px solid var(--card-border);" data-aos="zoom-in" data-aos-delay="0">
-        <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-pink-500/10 to-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <div class="relative z-10">
-          <div class="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-pink-500 to-red-500 flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold mb-3" style="color: var(--text-primary);">HappY Hearts</h3>
-          <p class="text-sm leading-relaxed mb-4" style="color: var(--text-secondary);">
-            Nurturing compassion and emotional well-being through community engagement, mental health support, and programs that foster kindness and empathy.
-          </p>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-2 py-1 rounded-full text-xs font-medium" style="background-color: rgba(236, 72, 153, 0.1); color: #ec4899;">Emotional Support</span>
-            <span class="px-2 py-1 rounded-full text-xs font-medium" style="background-color: rgba(236, 72, 153, 0.1); color: #ec4899;">Community Care</span>
-          </div>
-        </div>
+        <p>
+          The organization provides assistance to underserved communities by supplying them with meals, education-related initiatives, groceries, shoes, slippers, school supplies, and other essentials. HappYness Project Philippines has conducted close to 1,000 outreach activities, offering support to various institutions such as hospitals, fire protection stations, orphanages, public schools, elderly homes, and 80+ indigent communities all over the Philippines.
+        </p>
       </div>
       
-      <!-- Program 2: HappY Nanays -->
-      <div class="group relative p-6 md:p-8 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2" style="background-color: var(--card-bg); border: 1px solid var(--card-border);" data-aos="zoom-in" data-aos-delay="100">
-        <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <div class="relative z-10">
-          <div class="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold mb-3" style="color: var(--text-primary);">HappY Nanays</h3>
-          <p class="text-sm leading-relaxed mb-4" style="color: var(--text-secondary);">
-            Empowering mothers and families through livelihood programs, skills training, health initiatives, and sustainable support systems.
-          </p>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-2 py-1 rounded-full text-xs font-medium" style="background-color: rgba(139, 92, 246, 0.1); color: #8b5cf6;">Livelihood</span>
-            <span class="px-2 py-1 rounded-full text-xs font-medium" style="background-color: rgba(139, 92, 246, 0.1); color: #8b5cf6;">Family Support</span>
-          </div>
+      <!-- Stats Section -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 md:mt-12 pt-8" style="border-top: 1px solid var(--card-border);">
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-bold mb-2 text-green-500">1,000+</div>
+          <div class="text-sm md:text-base" style="color: var(--text-secondary);">Outreach Activities</div>
         </div>
-      </div>
-      
-      <!-- Program 3: HappY Kids -->
-      <div class="group relative p-6 md:p-8 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2" style="background-color: var(--card-bg); border: 1px solid var(--card-border);" data-aos="zoom-in" data-aos-delay="200">
-        <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-yellow-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <div class="relative z-10">
-          <div class="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold mb-3" style="color: var(--text-primary);">HappY Kids</h3>
-          <p class="text-sm leading-relaxed mb-4" style="color: var(--text-secondary);">
-            Providing education support, school supplies, nutrition programs, and essential needs to help children thrive and reach their full potential.
-          </p>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-2 py-1 rounded-full text-xs font-medium" style="background-color: rgba(245, 158, 11, 0.1); color: #f59e0b;">Education</span>
-            <span class="px-2 py-1 rounded-full text-xs font-medium" style="background-color: rgba(245, 158, 11, 0.1); color: #f59e0b;">Child Welfare</span>
-          </div>
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-bold mb-2 text-green-500">80+</div>
+          <div class="text-sm md:text-base" style="color: var(--text-secondary);">Indigent Communities</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-bold mb-2 text-green-500">2018</div>
+          <div class="text-sm md:text-base" style="color: var(--text-secondary);">Year Established</div>
         </div>
       </div>
     </div>
@@ -376,189 +40,77 @@
 </section>
 
 <!-- Mission & Vision Section -->
-<section class="py-16 md:py-24 relative">
-  <div class="max-w-6xl mx-auto px-4">
-    <div class="text-center mb-12" data-aos="fade-up">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--text-primary);">Our Guiding Principles</h2>
-      <div class="h-1 w-24 bg-gradient-to-r from-green-500 to-blue-500 mx-auto rounded-full"></div>
+<section class="min-h-screen flex items-center justify-center py-12 relative" data-aos="fade-up">
+  <div class="max-w-7xl mx-auto px-4 w-full">
+    <div class="text-center mb-8 md:mb-12">
+      <h1 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6" style="color: var(--text-primary);">OUR GUIDING PRINCIPLES</h1>
+      <div class="h-1 w-24 bg-[var(--brand-primary)] mx-auto rounded-full"></div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
       <!-- Mission Card -->
-      <div class="relative group" data-aos="fade-up" data-aos-delay="100">
-        <div class="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
-        <div class="relative rounded-2xl p-8 md:p-10 h-full flex flex-col" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
-          <!-- Icon -->
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg transform -rotate-3 group-hover:rotate-0 transition-transform duration-300">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <h3 class="text-2xl md:text-3xl font-bold" style="color: var(--text-primary);">Our Mission</h3>
+      <div class="rounded-2xl p-6 md:p-10 shadow-xl backdrop-blur-sm h-full flex flex-col" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
+        <div class="flex flex-col items-center text-center mb-6 md:mb-8">
+          <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg transform -rotate-3">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
           </div>
-
-          <p class="text-base leading-relaxed mb-8 flex-grow" style="color: var(--text-secondary);">
-            The HappYness Project is dedicated to making helping easy by creating sustainable programs that nurture the heart, uplift lives, and build inclusive communities. Through our core programs — HappY Hearts, HappY Nanays, and HappY Kids — we champion acts of kindness that promote holistic well-being, social empowerment, and lasting change for those most in need.
-          </p>
-
-          <ul class="space-y-3">
-            <li class="flex items-center gap-3 p-3 rounded-xl transition-colors duration-200" style="background-color: var(--bg-secondary);">
-              <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
-              <span class="text-sm font-medium" style="color: var(--text-primary);">Empower communities through sustainable initiatives</span>
-            </li>
-            <li class="flex items-center gap-3 p-3 rounded-xl transition-colors duration-200" style="background-color: var(--bg-secondary);">
-              <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
-              <span class="text-sm font-medium" style="color: var(--text-primary);">Foster inclusive and supportive environments</span>
-            </li>
-            <li class="flex items-center gap-3 p-3 rounded-xl transition-colors duration-200" style="background-color: var(--bg-secondary);">
-              <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
-              <span class="text-sm font-medium" style="color: var(--text-primary);">Drive positive change through collective action</span>
-            </li>
-          </ul>
+          <h2 class="text-2xl md:text-3xl font-bold" style="color: var(--text-primary);">Our Mission</h2>
         </div>
+
+        <p class="text-base leading-relaxed mb-6 md:mb-8 text-center flex-grow" style="color: var(--text-secondary);">
+          The HappYness Project is dedicated to making helping easy by creating sustainable programs that nurture the heart, uplift lives, and build inclusive communities. Through our core programs — HappY Hearts, HappY Nanays, and HappY Kids — we champion acts of kindness that promote holistic well-being, social empowerment, and lasting change for those most in need.
+        </p>
+
+        <ul class="space-y-3">
+          <li class="flex items-center gap-3 p-3 rounded-lg" style="background-color: var(--bg-secondary);">
+            <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
+            <span class="text-base" style="color: var(--text-primary);">Empower communities through sustainable initiatives</span>
+          </li>
+          <li class="flex items-center gap-3 p-3 rounded-lg" style="background-color: var(--bg-secondary);">
+            <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
+            <span class="text-base" style="color: var(--text-primary);">Foster inclusive and supportive environments</span>
+          </li>
+          <li class="flex items-center gap-3 p-3 rounded-lg" style="background-color: var(--bg-secondary);">
+            <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
+            <span class="text-base" style="color: var(--text-primary);">Drive positive change through collective action</span>
+          </li>
+        </ul>
       </div>
 
       <!-- Vision Card -->
-      <div class="relative group" data-aos="fade-up" data-aos-delay="200">
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
-        <div class="relative rounded-2xl p-8 md:p-10 h-full flex flex-col" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
-          <!-- Icon -->
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg transform rotate-3 group-hover:rotate-0 transition-transform duration-300">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-              </svg>
-            </div>
-            <h3 class="text-2xl md:text-3xl font-bold" style="color: var(--text-primary);">Our Vision</h3>
+      <div class="rounded-2xl p-6 md:p-10 shadow-xl backdrop-blur-sm h-full flex flex-col" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
+        <div class="flex flex-col items-center text-center mb-6 md:mb-8">
+          <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg transform rotate-3">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
           </div>
-
-          <p class="text-base leading-relaxed mb-8 flex-grow" style="color: var(--text-secondary);">
-            A world where kindness is a way of life — empowering communities to grow in love, compassion, and shared happiness. We envision a Philippines where every individual has access to opportunities, support, and the resources they need to thrive.
-          </p>
-
-          <ul class="space-y-3">
-            <li class="flex items-center gap-3 p-3 rounded-xl transition-colors duration-200" style="background-color: var(--bg-secondary);">
-              <span class="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
-              <span class="text-sm font-medium" style="color: var(--text-primary);">Universal access to well-being and opportunity</span>
-            </li>
-            <li class="flex items-center gap-3 p-3 rounded-xl transition-colors duration-200" style="background-color: var(--bg-secondary);">
-              <span class="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
-              <span class="text-sm font-medium" style="color: var(--text-primary);">Harmony between humanity and the environment</span>
-            </li>
-            <li class="flex items-center gap-3 p-3 rounded-xl transition-colors duration-200" style="background-color: var(--bg-secondary);">
-              <span class="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
-              <span class="text-sm font-medium" style="color: var(--text-primary);">Legacy of hope for future generations</span>
-            </li>
-          </ul>
+          <h2 class="text-2xl md:text-3xl font-bold" style="color: var(--text-primary);">Our Vision</h2>
         </div>
+
+        <p class="text-base leading-relaxed mb-6 md:mb-8 text-center flex-grow" style="color: var(--text-secondary);">
+          A world where kindness is a way of life — empowering communities to grow in love, compassion, and shared happiness.
+        </p>
+
+        <ul class="space-y-3">
+          <li class="flex items-center gap-3 p-3 rounded-lg" style="background-color: var(--bg-secondary);">
+            <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
+            <span class="text-base" style="color: var(--text-primary);">Universal access to well-being and opportunity</span>
+          </li>
+          <li class="flex items-center gap-3 p-3 rounded-lg" style="background-color: var(--bg-secondary);">
+            <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
+            <span class="text-base" style="color: var(--text-primary);">Harmony between humanity and the environment</span>
+          </li>
+          <li class="flex items-center gap-3 p-3 rounded-lg" style="background-color: var(--bg-secondary);">
+            <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
+            <span class="text-base" style="color: var(--text-primary);">Legacy of hope for future generations</span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
-
-<!-- Values Section -->
-<section class="py-16 md:py-24 relative overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-t from-green-500/5 via-transparent to-blue-500/5"></div>
-  
-  <div class="max-w-6xl mx-auto px-4 relative z-10">
-    <div class="text-center mb-12" data-aos="fade-up">
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium mb-4" style="background-color: rgba(124, 172, 248, 0.1); color: var(--brand-primary);">
-        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
-        </svg>
-        What Drives Us
-      </div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--text-primary);">Our Core Values</h2>
-      <p class="text-lg max-w-2xl mx-auto" style="color: var(--text-secondary);">
-        The principles that guide every action we take and every life we touch.
-      </p>
-    </div>
-    
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-      <!-- Value 1: Compassion -->
-      <div class="text-center p-6 rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style="background-color: var(--card-bg); border: 1px solid var(--card-border);" data-aos="fade-up" data-aos-delay="0">
-        <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center">
-          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-          </svg>
-        </div>
-        <h3 class="text-lg font-bold mb-2" style="color: var(--text-primary);">Compassion</h3>
-        <p class="text-xs" style="color: var(--text-secondary);">Leading with empathy in all we do</p>
-      </div>
-      
-      <!-- Value 2: Integrity -->
-      <div class="text-center p-6 rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style="background-color: var(--card-bg); border: 1px solid var(--card-border);" data-aos="fade-up" data-aos-delay="100">
-        <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center">
-          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-          </svg>
-        </div>
-        <h3 class="text-lg font-bold mb-2" style="color: var(--text-primary);">Integrity</h3>
-        <p class="text-xs" style="color: var(--text-secondary);">Transparent and accountable always</p>
-      </div>
-      
-      <!-- Value 3: Community -->
-      <div class="text-center p-6 rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style="background-color: var(--card-bg); border: 1px solid var(--card-border);" data-aos="fade-up" data-aos-delay="200">
-        <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center">
-          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
-          </svg>
-        </div>
-        <h3 class="text-lg font-bold mb-2" style="color: var(--text-primary);">Community</h3>
-        <p class="text-xs" style="color: var(--text-secondary);">Together we achieve more</p>
-      </div>
-      
-      <!-- Value 4: Sustainability -->
-      <div class="text-center p-6 rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style="background-color: var(--card-bg); border: 1px solid var(--card-border);" data-aos="fade-up" data-aos-delay="300">
-        <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center">
-          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-        </div>
-        <h3 class="text-lg font-bold mb-2" style="color: var(--text-primary);">Sustainability</h3>
-        <p class="text-xs" style="color: var(--text-secondary);">Creating lasting positive impact</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Call to Action Section -->
-<section class="py-16 md:py-24 relative overflow-hidden">
-  <!-- Gradient background -->
-  <div class="absolute inset-0 bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600"></div>
-  
-  <!-- Decorative elements -->
-  <div class="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-  <div class="absolute bottom-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
-  <div class="absolute top-1/2 left-1/4 w-3 h-3 bg-white/40 rounded-full"></div>
-  <div class="absolute top-1/3 right-1/4 w-2 h-2 bg-white/40 rounded-full"></div>
-  <div class="absolute bottom-1/3 right-1/3 w-4 h-4 bg-white/30 rounded-full"></div>
-  
-  <div class="relative z-10 max-w-4xl mx-auto px-4 text-center" data-aos="fade-up">
-    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">
-      Be Part of the HappYness Movement
-    </h2>
-    <p class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10">
-      Join us in spreading kindness and making a lasting difference in communities across the Philippines. Every act of generosity, no matter how small, creates ripples of happiness.
-    </p>
-    
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="{% url 'donate' %}" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-green-600 font-bold rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-        </svg>
-        Donate Now
-      </a>
-      <a href="{% url 'partners' %}" class="inline-flex items-center gap-2 px-8 py-4 bg-transparent text-white font-bold rounded-xl border-2 border-white/50 hover:bg-white/10 hover:border-white transition-all duration-300">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-        </svg>
-        Partner With Us
-      </a>
-    </div>
-  </div>
-</section>
-
 {% endblock %}

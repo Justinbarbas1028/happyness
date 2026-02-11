@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Terms and Conditions - Happyness{% endblock %}
+{% block content %}
+<section class="min-h-screen flex items-center justify-center py-12 relative" data-aos="fade-up">
+  <div class="max-w-4xl mx-auto px-4 w-full">
+    <div class="text-center mb-8 md:mb-12">
+      <h1 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6" style="color: var(--text-primary);">Terms and Conditions</h1>
+      <div class="h-1 w-24 bg-[var(--brand-primary)] mx-auto rounded-full"></div>
+    </div>
+    
+    <div class="rounded-2xl p-6 md:p-10 shadow-xl backdrop-blur-sm" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
+      <div class="text-center py-12">
+        <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style="background-color: var(--bg-secondary);">
+          <svg class="w-10 h-10" style="color: var(--brand-primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold mb-4" style="color: var(--text-primary);">Coming Soon</h2>
+        <p class="text-lg mb-8" style="color: var(--text-secondary);">
+          Our Terms and Conditions are currently being prepared. Please check back later.
+        </p>
+        <a href="/" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-white transition" style="background-color: var(--button-primary);">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Back to Home
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

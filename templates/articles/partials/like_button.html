@@ -1,0 +1,24 @@
+{% if user.is_authenticated %}
+<button hx-post="{% url 'article_like' article.slug %}"
+        hx-target="#like-button-{{ article.id }}"
+        hx-swap="outerHTML"
+        class="action-btn {% if user_has_liked %}active{% endif %}"
+        id="like-button-{{ article.id }}">
+  <svg class="w-4 h-4" 
+       fill="{% if user_has_liked %}currentColor{% else %}none{% endif %}" 
+       stroke="currentColor" 
+       viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+  </svg>
+  <span>{{ like_count|default:article.like_count }}</span>
+</button>
+{% else %}
+<a href="/accounts/login/?next={{ request.path }}"
+   class="action-btn"
+   id="like-button-{{ article.id }}">
+  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+  </svg>
+  <span>{{ like_count|default:article.like_count }}</span>
+</a>
+{% endif %}

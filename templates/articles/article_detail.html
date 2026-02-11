@@ -1,0 +1,384 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ article.title }} - HappyNess{% endblock %}
+
+{% block content %}
+<!-- Reading Progress Bar -->
+<div id="reading-progress" class="reading-progress"></div>
+
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Hero Section with Image -->
+  <div class="relative rounded-2xl overflow-hidden mb-8" data-aos="fade-up" style="min-height: 280px; background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--card-border) 100%);">
+    {% if article.featured_image %}
+    <img src="{{ article.featured_image.url }}" 
+         alt="{{ article.title }}"
+         class="absolute inset-0 w-full h-full object-cover"
+         onerror="this.style.display='none';" />
+    {% endif %}
+    <!-- Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
+    
+    <!-- Content Overlay -->
+    <div class="relative z-10 p-6 sm:p-8 lg:p-10 flex flex-col justify-end min-h-[280px] sm:min-h-[320px] lg:min-h-[380px]">
+      <!-- Type & Category Badges -->
+      <div class="flex flex-wrap items-center gap-2 mb-4">
+        <span class="article-type-badge-light type-{{ article.article_type }}">
+          {% if article.article_type == 'update' %}
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+          </svg>
+          {% elif article.article_type == 'event' %}
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          {% elif article.article_type == 'news' %}
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+          </svg>
+          {% else %}
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          {% endif %}
+          {{ article.get_article_type_display }}
+        </span>
+        {% if article.category %}
+        <span class="px-3 py-1 rounded-full text-xs font-medium bg-white/20 text-white backdrop-blur-sm">
+          {{ article.category.name }}
+        </span>
+        {% endif %}
+        {% if article.is_featured %}
+        <span class="px-3 py-1 rounded-full text-xs font-medium bg-amber-500/90 text-white">
+          Featured
+        </span>
+        {% endif %}
+      </div>
+      
+      <!-- Title -->
+      <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
+        {{ article.title }}
+      </h1>
+      
+      <!-- Meta Info -->
+      <div class="flex flex-wrap items-center gap-3 sm:gap-4 text-white/80 text-xs sm:text-sm">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white text-xs font-semibold">
+            {{ article.author.username|slice:":1"|upper }}
+          </div>
+          <span class="font-medium text-white">{{ article.author.username }}</span>
+        </div>
+        <span class="hidden sm:inline text-white/50">•</span>
+        <span>{{ article.published_at|date:"M d, Y" }}</span>
+        <span class="hidden sm:inline text-white/50">•</span>
+        <span class="hidden sm:inline">{{ article.reading_time }} min read</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Breadcrumb -->
+  <nav class="mb-6 sm:mb-8" data-aos="fade-up">
+    <ol class="flex flex-wrap items-center gap-1 sm:gap-2 text-xs sm:text-sm" style="color: var(--text-muted);">
+      <li>
+        <a href="{% url 'article_list' %}" class="hover:underline transition-colors" style="color: var(--text-secondary);">Articles</a>
+      </li>
+      <li>
+        <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </li>
+      {% if article.category %}
+      <li>
+        <a href="{% url 'article_list' %}?category={{ article.category.slug }}" class="hover:underline transition-colors" style="color: var(--text-secondary);">
+          {{ article.category.name }}
+        </a>
+      </li>
+      <li>
+        <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </li>
+      {% endif %}
+      <li class="truncate max-w-[150px] sm:max-w-none" style="color: var(--text-muted);">{{ article.title|truncatewords:5 }}</li>
+    </ol>
+  </nav>
+
+  <!-- Main Content Grid -->
+  <div class="lg:grid lg:grid-cols-12 lg:gap-10">
+    <!-- Article Content -->
+    <div class="lg:col-span-8">
+      <article class="mb-8" data-aos="fade-up">
+        <div class="article-prose" id="article-content">
+          {{ article.content|safe }}
+        </div>
+      </article>
+
+      <!-- Tags -->
+      {% if article.tags.all %}
+      <div class="flex flex-wrap gap-2 mb-6 pb-6" style="border-bottom: 1px solid var(--card-border);" data-aos="fade-up">
+        {% for tag in article.tags.all %}
+        <a href="{% url 'article_list' %}?tag={{ tag.slug }}"
+           class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs sm:text-sm transition-colors hover:bg-[var(--card-bg-hover)]"
+           style="background-color: var(--bg-tertiary); color: var(--text-secondary);">
+          <span style="color: var(--text-muted);">#</span>{{ tag.name }}
+        </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- Action Bar -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 rounded-xl mb-8" style="background-color: var(--bg-tertiary);" data-aos="fade-up">
+        <!-- Stats & Actions -->
+        <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+          <!-- Views -->
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5" style="color: var(--text-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            <span class="text-xs sm:text-sm font-medium" style="color: var(--text-secondary);">{{ article.view_count }}</span>
+          </div>
+          
+          <!-- Like Button -->
+          <div id="like-button-{{ article.id }}">
+            {% include 'articles/partials/like_button.html' with article=article user_has_liked=user_has_liked like_count=article.like_count %}
+          </div>
+          
+          <!-- Bookmark Button -->
+          <div id="bookmark-button-{{ article.id }}">
+            {% include 'articles/partials/bookmark_button.html' with article=article user_has_bookmarked=user_has_bookmarked %}
+          </div>
+        </div>
+        
+        <!-- Share Buttons -->
+        <div class="flex items-center gap-2">
+          <span class="text-xs sm:text-sm font-medium mr-1" style="color: var(--text-muted);">Share</span>
+          
+          <!-- Copy Link -->
+          <button onclick="copyArticleLink()" 
+                  class="share-btn" 
+                  title="Copy link">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+            </svg>
+          </button>
+          
+          <!-- Twitter/X -->
+          <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ article.title|urlencode }}" 
+             target="_blank" rel="noopener"
+             class="share-btn">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" 
+             target="_blank" rel="noopener"
+             class="share-btn">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Author Card -->
+      <div class="p-5 sm:p-6 rounded-xl mb-8" style="background-color: var(--card-bg); border: 1px solid var(--card-border);" data-aos="fade-up">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-secondary)] flex items-center justify-center text-white text-lg sm:text-xl font-bold shrink-0">
+            {{ article.author.username|slice:":1"|upper }}
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="text-xs font-semibold uppercase tracking-wider mb-1" style="color: var(--text-muted);">Written by</div>
+            <h3 class="text-base sm:text-lg font-semibold mb-1 truncate" style="color: var(--text-primary);">{{ article.author.username }}</h3>
+            <p class="text-xs sm:text-sm" style="color: var(--text-secondary);">
+              Member since {{ article.author.date_joined|date:"F Y" }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comments Section -->
+      <section class="mb-8 lg:mb-12" data-aos="fade-up">
+        <div class="flex items-center gap-3 sm:gap-4 mb-6">
+          <h2 class="text-lg sm:text-xl font-bold" style="color: var(--text-primary);">
+            Discussion
+          </h2>
+          <span class="px-2.5 py-1 rounded-full text-xs font-medium" style="background-color: var(--bg-tertiary); color: var(--text-secondary);">
+            {{ comments.count }}
+          </span>
+        </div>
+        
+        <!-- Comment Form -->
+        {% if user.is_authenticated %}
+        <form hx-post="{% url 'article_comment' article.slug %}"
+              hx-target="#comments-section"
+              hx-swap="innerHTML"
+              class="mb-6 p-4 sm:p-5 rounded-xl" style="background-color: var(--bg-tertiary);">
+          {% csrf_token %}
+          <div class="flex gap-3 sm:gap-4">
+            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-secondary)] flex items-center justify-center text-white text-xs sm:text-sm font-semibold shrink-0">
+              {{ user.username|slice:":1"|upper }}
+            </div>
+            <div class="flex-1 min-w-0">
+              <textarea name="content" 
+                        rows="3" 
+                        placeholder="Share your thoughts..."
+                        required
+                        class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl resize-none transition-all duration-200 focus:ring-2 focus:outline-none text-sm"
+                        style="background-color: var(--card-bg); color: var(--text-primary); border: 1px solid var(--card-border);"></textarea>
+              <div class="flex justify-end mt-3">
+                <button type="submit" class="btn btn-primary text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-2.5 rounded-full">
+                  Post Comment
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+        {% else %}
+        <div class="p-6 sm:p-8 mb-6 text-center rounded-xl" style="background-color: var(--bg-tertiary);">
+          <svg class="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-4" style="color: var(--text-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+          </svg>
+          <p class="text-sm sm:text-base mb-4" style="color: var(--text-secondary);">
+            Join the conversation
+          </p>
+          <a href="/accounts/login/?next={{ request.path }}" 
+             class="btn btn-primary text-xs sm:text-sm px-5 sm:px-6 py-2 sm:py-2.5 rounded-full"
+             hx-boost="false">
+            Sign In to Comment
+          </a>
+        </div>
+        {% endif %}
+        
+        <!-- Comments List -->
+        <div id="comments-section">
+          {% include 'articles/partials/comment_list.html' with comments=comments %}
+        </div>
+      </section>
+    </div>
+
+    <!-- Sidebar (Desktop Only) -->
+    <aside class="hidden lg:block lg:col-span-4">
+      <div class="sticky top-24 space-y-6">
+        <!-- Reading Time Card -->
+        <div class="p-5 rounded-xl" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
+          <div class="flex items-center gap-3 mb-3">
+            <svg class="w-5 h-5" style="color: var(--brand-primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-sm font-semibold" style="color: var(--text-primary);">{{ article.reading_time }} min read</span>
+          </div>
+          <p class="text-xs" style="color: var(--text-muted);">Published {{ article.published_at|date:"F d, Y" }}</p>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="p-5 rounded-xl" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
+          <h4 class="text-sm font-semibold mb-3" style="color: var(--text-primary);">Quick Actions</h4>
+          <div class="space-y-2">
+            <a href="{% url 'article_list' %}" class="flex items-center gap-2 p-2 rounded-lg transition-colors hover:bg-[var(--bg-tertiary)]">
+              <svg class="w-4 h-4" style="color: var(--text-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+              </svg>
+              <span class="text-sm" style="color: var(--text-secondary);">Back to Articles</span>
+            </a>
+            {% if article.category %}
+            <a href="{% url 'article_list' %}?category={{ article.category.slug }}" class="flex items-center gap-2 p-2 rounded-lg transition-colors hover:bg-[var(--bg-tertiary)]">
+              <svg class="w-4 h-4" style="color: var(--text-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"></path>
+              </svg>
+              <span class="text-sm" style="color: var(--text-secondary);">More in {{ article.category.name }}</span>
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Related Articles -->
+  {% if related_articles %}
+  <section class="mt-8 lg:mt-12" data-aos="fade-up">
+    <div class="flex items-center gap-4 mb-6">
+      <h2 class="text-lg sm:text-xl font-bold" style="color: var(--text-primary);">
+        Related Stories
+      </h2>
+      <div class="flex-1 h-px" style="background-color: var(--card-border);"></div>
+      <a href="{% url 'article_list' %}{% if article.category %}?category={{ article.category.slug }}{% endif %}" 
+         class="text-xs sm:text-sm font-medium" style="color: var(--brand-primary);">
+        View All
+      </a>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      {% for related in related_articles|slice:":3" %}
+      {% include 'articles/partials/article_card.html' with article=related %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</div>
+
+<!-- Toast Notification -->
+<div id="toast" class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:w-auto z-50 hidden">
+  <div class="px-4 py-3 rounded-xl shadow-lg flex items-center justify-center sm:justify-start gap-2"
+       style="background-color: var(--text-primary); color: var(--bg-primary);">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+    </svg>
+    <span id="toast-message" class="text-sm">Link copied!</span>
+  </div>
+</div>
+
+<script>
+// Reading Progress Bar
+function updateReadingProgress() {
+  const article = document.getElementById('article-content');
+  if (!article) return;
+  
+  const articleRect = article.getBoundingClientRect();
+  const articleTop = window.scrollY + articleRect.top;
+  const articleHeight = article.offsetHeight;
+  const windowHeight = window.innerHeight;
+  const scrolled = window.scrollY - articleTop + windowHeight * 0.3;
+  const progress = Math.min(Math.max(scrolled / articleHeight * 100, 0), 100);
+  
+  document.getElementById('reading-progress').style.width = progress + '%';
+}
+
+window.addEventListener('scroll', updateReadingProgress);
+window.addEventListener('resize', updateReadingProgress);
+
+// Copy Article Link
+function copyArticleLink() {
+  const url = window.location.href;
+  navigator.clipboard.writeText(url).then(() => {
+    showToast('Link copied to clipboard!');
+  }).catch(err => {
+    const input = document.createElement('input');
+    input.value = url;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+    showToast('Link copied to clipboard!');
+  });
+}
+
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  const toastMessage = document.getElementById('toast-message');
+  toastMessage.textContent = message;
+  toast.classList.remove('hidden');
+  
+  setTimeout(() => {
+    toast.classList.add('hidden');
+  }, 3000);
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+  updateReadingProgress();
+});
+</script>
+{% endblock %}

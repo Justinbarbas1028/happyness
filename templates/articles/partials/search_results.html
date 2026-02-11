@@ -1,0 +1,36 @@
+{% if articles %}
+<div class="absolute top-full left-0 right-0 mt-2 rounded-xl shadow-xl overflow-hidden z-50"
+     style="background-color: var(--bg-secondary); border: 1px solid var(--card-border);">
+  {% for article in articles %}
+  <a href="{% url 'article_detail' article.slug %}" 
+     class="flex items-center gap-3 p-3 hover:bg-[var(--card-bg)] transition-colors"
+     style="border-bottom: 1px solid var(--card-border);">
+    {% if article.featured_image %}
+    <img src="{{ article.featured_image.url }}" alt="" class="w-12 h-12 rounded-lg object-cover shrink-0">
+    {% else %}
+    <div class="w-12 h-12 rounded-lg flex items-center justify-center shrink-0" style="background-color: var(--card-bg);">
+      <svg class="w-5 h-5" style="color: var(--text-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+      </svg>
+    </div>
+    {% endif %}
+    <div class="flex-1 min-w-0">
+      <p class="font-medium truncate" style="color: var(--text-primary);">{{ article.title }}</p>
+      {% if article.category %}
+      <p class="text-xs" style="color: var(--text-muted);">{{ article.category.name }}</p>
+      {% endif %}
+    </div>
+  </a>
+  {% endfor %}
+  <a href="{% url 'article_list' %}?q={{ query }}" 
+     class="block p-3 text-center text-sm font-medium hover:bg-[var(--card-bg)] transition-colors"
+     style="color: var(--brand-primary);">
+    View all results for "{{ query }}"
+  </a>
+</div>
+{% elif query %}
+<div class="absolute top-full left-0 right-0 mt-2 rounded-xl shadow-xl p-4 text-center z-50"
+     style="background-color: var(--bg-secondary); border: 1px solid var(--card-border);">
+  <p class="text-sm" style="color: var(--text-muted);">No articles found for "{{ query }}"</p>
+</div>
+{% endif %}

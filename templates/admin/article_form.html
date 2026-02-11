@@ -1,0 +1,277 @@
+{% extends 'admin/base_admin.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<!-- Messages -->
+{% if messages %}
+<div class="mb-6">
+  {% for message in messages %}
+  <div class="p-4 rounded-lg mb-2 {% if message.tags == 'success' %}bg-green-100 text-green-800{% elif message.tags == 'error' %}bg-red-100 text-red-800{% else %}bg-blue-100 text-blue-800{% endif %}">
+    {{ message }}
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<form method="post" enctype="multipart/form-data" class="space-y-6">
+  {% csrf_token %}
+  
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Main Content -->
+    <div class="lg:col-span-2 space-y-6">
+      <!-- Title -->
+      <div class="card p-6" data-aos="fade-up">
+        <label class="block text-sm font-medium mb-2" style="color: var(--text-primary);">
+          Article Title <span class="text-red-500">*</span>
+        </label>
+        <input type="text" name="title" value="{{ form.title.value|default:'' }}" required
+               class="w-full px-4 py-2.5 rounded-lg transition focus:outline-none focus:ring-2"
+               style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary);"
+               placeholder="Enter article title...">
+        {% if form.title.errors %}
+        <p class="mt-2 text-sm text-red-500">{{ form.title.errors.0 }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Excerpt -->
+      <div class="card p-6" data-aos="fade-up" data-aos-delay="100">
+        <label class="block text-sm font-medium mb-2" style="color: var(--text-primary);">
+          Excerpt <span class="text-red-500">*</span>
+        </label>
+        <textarea name="excerpt" rows="3" required maxlength="300"
+                  class="w-full px-4 py-2.5 rounded-lg transition focus:outline-none focus:ring-2"
+                  style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary);"
+                  placeholder="Brief description for article preview (max 300 characters)...">{{ form.excerpt.value|default:'' }}</textarea>
+        <p class="mt-1 text-xs" style="color: var(--text-muted);">This will be shown on article cards</p>
+        {% if form.excerpt.errors %}
+        <p class="mt-2 text-sm text-red-500">{{ form.excerpt.errors.0 }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Content (TinyMCE) -->
+      <div class="card p-6" data-aos="fade-up" data-aos-delay="200">
+        <label class="block text-sm font-medium mb-2" style="color: var(--text-primary);">
+          Content <span class="text-red-500">*</span>
+        </label>
+        {{ form.content }}
+        {% if form.content.errors %}
+        <p class="mt-2 text-sm text-red-500">{{ form.content.errors.0 }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="space-y-6">
+      <!-- Publish Box -->
+      <div class="card p-6" data-aos="fade-up" data-aos-delay="100">
+        <h3 class="text-lg font-bold mb-4" style="color: var(--text-primary);">Publish</h3>
+        
+        <div class="space-y-4">
+          <!-- Article Type -->
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color: var(--text-primary);">Article Type</label>
+            <select name="article_type" class="w-full px-4 py-2.5 rounded-lg transition focus:outline-none focus:ring-2"
+                    style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary);">
+              <option value="article" {% if form.article_type.value == 'article' %}selected{% endif %}>Article</option>
+              <option value="update" {% if form.article_type.value == 'update' %}selected{% endif %}>Project Update</option>
+              <option value="event" {% if form.article_type.value == 'event' %}selected{% endif %}>Event</option>
+              <option value="news" {% if form.article_type.value == 'news' %}selected{% endif %}>News</option>
+            </select>
+            <p class="mt-1 text-xs" style="color: var(--text-muted);">Choose the type of content</p>
+          </div>
+          
+          <!-- Status -->
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color: var(--text-primary);">Status</label>
+            <select name="status" class="w-full px-4 py-2.5 rounded-lg transition focus:outline-none focus:ring-2"
+                    style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary);">
+              <option value="draft" {% if form.status.value == 'draft' %}selected{% endif %}>Draft</option>
+              <option value="published" {% if form.status.value == 'published' %}selected{% endif %}>Published</option>
+            </select>
+          </div>
+
+          <!-- Featured -->
+          <div class="flex items-center gap-3">
+            <input type="checkbox" name="is_featured" id="is_featured" 
+                   {% if form.is_featured.value %}checked{% endif %}
+                   class="h-5 w-5 rounded focus:ring-2"
+                   style="accent-color: var(--brand-secondary);">
+            <label for="is_featured" class="text-sm font-medium" style="color: var(--text-primary);">
+              Feature this article
+            </label>
+          </div>
+          
+          <!-- Scheduled Publishing -->
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color: var(--text-primary);">
+              Schedule For (Optional)
+            </label>
+            <input type="datetime-local" name="scheduled_at" 
+                   value="{% if form.scheduled_at.value %}{{ form.scheduled_at.value|date:'Y-m-d\TH:i' }}{% endif %}"
+                   class="w-full px-4 py-2.5 rounded-lg transition focus:outline-none focus:ring-2"
+                   style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary);">
+            <p class="mt-1 text-xs" style="color: var(--text-muted);">Leave empty to publish immediately when status is Published</p>
+          </div>
+        </div>
+
+        <div class="flex gap-3 mt-6 pt-4" style="border-top: 1px solid var(--card-border);">
+          <a href="{% url 'admin_articles' %}" class="btn btn-secondary flex-1 text-center">Cancel</a>
+          <button type="submit" class="btn btn-primary flex-1">
+            {% if is_edit %}Update{% else %}Publish{% endif %}
+          </button>
+        </div>
+      </div>
+
+      <!-- Category -->
+      <div class="card p-6" data-aos="fade-up" data-aos-delay="200">
+        <h3 class="text-lg font-bold mb-4" style="color: var(--text-primary);">Category</h3>
+        <select name="category" class="w-full px-4 py-2.5 rounded-lg transition focus:outline-none focus:ring-2"
+                style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary);">
+          <option value="">No category</option>
+          {% for category in categories %}
+          <option value="{{ category.id }}" {% if form.category.value == category.id %}selected{% endif %}>
+            {{ category.name }}
+          </option>
+          {% endfor %}
+        </select>
+        <a href="{% url 'admin_categories' %}" class="inline-block mt-3 text-sm font-medium" style="color: var(--brand-primary);">
+          + Add new category
+        </a>
+      </div>
+      
+      <!-- Tags -->
+      <div class="card p-6" data-aos="fade-up" data-aos-delay="250">
+        <h3 class="text-lg font-bold mb-4" style="color: var(--text-primary);">Tags</h3>
+        <select name="tags" multiple 
+                class="w-full px-4 py-2.5 rounded-lg transition focus:outline-none focus:ring-2"
+                style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); min-height: 120px;">
+          {% for tag in tags %}
+          <option value="{{ tag.id }}" {% if tag in form.instance.tags.all %}selected{% endif %}>
+            {{ tag.name }}{% if tag.is_predefined %} (predefined){% endif %}
+          </option>
+          {% endfor %}
+        </select>
+        <p class="mt-1 text-xs" style="color: var(--text-muted);">Hold Ctrl/Cmd to select multiple</p>
+        
+        <!-- Inline Tag Creation -->
+        <div class="mt-4 pt-4" style="border-top: 1px solid var(--card-border);">
+          <p class="text-sm font-medium mb-2" style="color: var(--text-primary);">Quick Add Tag</p>
+          <div class="flex gap-2">
+            <input type="text" id="newTagName" placeholder="New tag name..."
+                   class="flex-1 px-3 py-2 rounded-lg text-sm transition focus:outline-none focus:ring-2"
+                   style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary);">
+            <button type="button" onclick="createTag()"
+                    class="px-3 py-2 rounded-lg text-sm font-medium transition hover:opacity-90"
+                    style="background-color: var(--brand-primary); color: white;">
+              Add
+            </button>
+          </div>
+          <div id="tagMessage" class="mt-2 text-sm"></div>
+        </div>
+        
+        <a href="{% url 'admin_tags' %}" class="inline-block mt-3 text-sm font-medium" style="color: var(--brand-primary);">
+          Manage all tags
+        </a>
+      </div>
+
+      <!-- Featured Image -->
+      <div class="card p-6" data-aos="fade-up" data-aos-delay="300">
+        <h3 class="text-lg font-bold mb-4" style="color: var(--text-primary);">Featured Image</h3>
+        
+        {% if is_edit and article.featured_image %}
+        <div class="mb-4">
+          <img src="{{ article.featured_image.url }}" alt="Current image" class="w-full h-32 object-cover rounded-lg">
+          <p class="text-xs mt-2" style="color: var(--text-muted);">Current image</p>
+        </div>
+        {% endif %}
+        
+        <input type="file" name="featured_image" accept="image/*"
+               class="w-full px-4 py-2.5 rounded-lg transition focus:outline-none focus:ring-2 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-500 file:text-white hover:file:bg-green-600"
+               style="background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary);">
+        <p class="text-xs mt-2" style="color: var(--text-muted);">Recommended: 1200x630px</p>
+      </div>
+      
+      <!-- Article Stats (Edit only) -->
+      {% if is_edit %}
+      <div class="card p-6" data-aos="fade-up" data-aos-delay="350">
+        <h3 class="text-lg font-bold mb-4" style="color: var(--text-primary);">Statistics</h3>
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-sm" style="color: var(--text-muted);">Views</span>
+            <span class="font-semibold" style="color: var(--text-primary);">{{ article.view_count }}</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-sm" style="color: var(--text-muted);">Likes</span>
+            <span class="font-semibold" style="color: var(--text-primary);">{{ article.like_count }}</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-sm" style="color: var(--text-muted);">Comments</span>
+            <span class="font-semibold" style="color: var(--text-primary);">{{ article.comment_count }}</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-sm" style="color: var(--text-muted);">Bookmarks</span>
+            <span class="font-semibold" style="color: var(--text-primary);">{{ article.bookmark_count }}</span>
+          </div>
+          {% if article.published_at %}
+          <div class="flex justify-between items-center pt-3" style="border-top: 1px solid var(--card-border);">
+            <span class="text-sm" style="color: var(--text-muted);">Published</span>
+            <span class="text-sm" style="color: var(--text-secondary);">{{ article.published_at|date:"M d, Y" }}</span>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</form>
+
+<!-- TinyMCE Initialization -->
+{{ form.media }}
+
+<script>
+function createTag() {
+  const nameInput = document.getElementById('newTagName');
+  const messageDiv = document.getElementById('tagMessage');
+  const name = nameInput.value.trim();
+  
+  if (!name) {
+    messageDiv.innerHTML = '<span class="text-red-500">Please enter a tag name</span>';
+    return;
+  }
+  
+  // Create tag via HTMX/fetch
+  fetch('{% url "admin_tag_create_inline" %}', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'X-CSRFToken': '{{ csrf_token }}'
+    },
+    body: 'name=' + encodeURIComponent(name)
+  })
+  .then(response => response.text())
+  .then(html => {
+    if (html.includes('created')) {
+      // Add option to select
+      const select = document.querySelector('select[name="tags"]');
+      const match = html.match(/value="(\d+)"/);
+      const nameMatch = html.match(/>([^<]+)<\/option>/);
+      if (match && nameMatch) {
+        const option = document.createElement('option');
+        option.value = match[1];
+        option.textContent = nameMatch[1];
+        option.selected = true;
+        select.appendChild(option);
+      }
+      messageDiv.innerHTML = '<span class="text-green-500">Tag created and selected!</span>';
+      nameInput.value = '';
+    } else {
+      messageDiv.innerHTML = html;
+    }
+  })
+  .catch(err => {
+    messageDiv.innerHTML = '<span class="text-red-500">Error creating tag</span>';
+  });
+}
+</script>
+{% endblock %}

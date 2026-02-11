@@ -1,0 +1,318 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Stories - HappyNess{% endblock %}
+
+{% block content %}
+<div class="space-y-10">
+  <!-- Hero Section -->
+  <div class="text-center py-12 lg:py-16" data-aos="fade-up">
+    <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-4" 
+          style="background-color: var(--bg-tertiary); color: var(--text-muted);">
+      Our Stories
+    </span>
+    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 tracking-tight" style="color: var(--text-primary);">
+      Community Updates
+    </h1>
+    <p class="text-lg max-w-2xl mx-auto mb-8" style="color: var(--text-secondary);">
+      Stay informed with the latest news, project updates, and events from our organization.
+    </p>
+    
+    <!-- Search Bar -->
+    <div class="max-w-xl mx-auto relative">
+      <form action="{% url 'article_list' %}" method="get" class="relative">
+        <input type="search" name="q" value="{{ search_query|default:'' }}"
+               placeholder="Search stories..."
+               hx-get="{% url 'article_search_instant' %}"
+               hx-trigger="keyup changed delay:300ms"
+               hx-target="#search-dropdown"
+               class="w-full pl-12 pr-4 py-4 rounded-full text-sm transition-all focus:outline-none focus:ring-2"
+               style="background-color: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-primary); box-shadow: var(--shadow-md);">
+        <svg class="w-5 h-5 absolute left-5 top-1/2 -translate-y-1/2" style="color: var(--text-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        {% if search_query %}
+        <a href="{% url 'article_list' %}" 
+           class="absolute right-5 top-1/2 -translate-y-1/2 p-1 rounded-full transition-colors"
+           style="color: var(--text-muted);">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </a>
+        {% endif %}
+      </form>
+      <div id="search-dropdown"></div>
+    </div>
+  </div>
+
+  <!-- Search Results Message -->
+  {% if search_query %}
+  <div class="text-center" data-aos="fade-up">
+    <p class="text-sm" style="color: var(--text-secondary);">
+      Showing results for "<strong style="color: var(--text-primary);">{{ search_query }}</strong>"
+      <span style="color: var(--text-muted);">({{ articles.paginator.count }} found)</span>
+    </p>
+  </div>
+  {% endif %}
+
+  <!-- Filter Section -->
+  <div class="flex flex-col sm:flex-row items-center justify-center gap-4" data-aos="fade-up">
+    <!-- Article Type Filter Pills -->
+    <div class="flex flex-wrap items-center justify-center gap-2">
+      <a href="{% url 'article_list' %}{% if search_query %}?q={{ search_query }}{% endif %}" 
+         class="filter-pill {% if not current_type %}active{% endif %}">
+        All
+      </a>
+      <a href="{% url 'article_list' %}?type=update{% if search_query %}&q={{ search_query }}{% endif %}" 
+         class="filter-pill {% if current_type == 'update' %}active{% endif %}">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+        </svg>
+        Updates
+      </a>
+      <a href="{% url 'article_list' %}?type=event{% if search_query %}&q={{ search_query }}{% endif %}" 
+         class="filter-pill {% if current_type == 'event' %}active{% endif %}">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        </svg>
+        Events
+      </a>
+      <a href="{% url 'article_list' %}?type=news{% if search_query %}&q={{ search_query }}{% endif %}" 
+         class="filter-pill {% if current_type == 'news' %}active{% endif %}">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+        </svg>
+        News
+      </a>
+      <a href="{% url 'article_list' %}?type=article{% if search_query %}&q={{ search_query }}{% endif %}" 
+         class="filter-pill {% if current_type == 'article' %}active{% endif %}">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
+        Articles
+      </a>
+    </div>
+  </div>
+
+  <!-- Category Filter (subtle text links) -->
+  {% if categories and not search_query %}
+  <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2" data-aos="fade-up" data-aos-delay="50">
+    <span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-muted);">Categories:</span>
+    <a href="{% url 'article_list' %}{% if current_type %}?type={{ current_type }}{% endif %}" 
+       class="text-sm transition-colors {% if not current_category %}font-semibold{% endif %}"
+       style="color: {% if not current_category %}var(--text-primary){% else %}var(--text-muted){% endif %};">
+      All
+    </a>
+    {% for category in categories %}
+    <a href="{% url 'article_list' %}?category={{ category.slug }}{% if current_type %}&type={{ current_type }}{% endif %}" 
+       class="text-sm transition-colors {% if current_category == category.slug %}font-semibold{% endif %}"
+       style="color: {% if current_category == category.slug %}var(--text-primary){% else %}var(--text-muted){% endif %};">
+      {{ category.name }}
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Featured Articles Section -->
+  {% if featured_articles and not search_query and not current_type and not current_category %}
+  <div data-aos="fade-up" data-aos-delay="100">
+    <div class="flex items-center gap-4 mb-6">
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5" style="color: var(--warning);" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path>
+        </svg>
+        <span class="text-sm font-semibold uppercase tracking-wider" style="color: var(--text-muted);">Featured</span>
+      </div>
+      <div class="flex-1 h-px" style="background-color: var(--card-border);"></div>
+    </div>
+    
+    <!-- Featured Grid: First large, rest smaller -->
+    <div class="grid lg:grid-cols-2 gap-6">
+      {% for featured in featured_articles|slice:":1" %}
+      <!-- Large Featured Card -->
+      <div class="featured-card-large group relative rounded-2xl overflow-hidden" style="background-color: var(--card-bg); min-height: 360px;">
+        <a href="{% url 'article_detail' featured.slug %}" class="block h-full overflow-hidden" hx-boost="false">
+          <div class="absolute inset-0" style="background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--card-border) 100%);"></div>
+          {% if featured.featured_image %}
+          <img src="{{ featured.featured_image.url }}" 
+               alt="{{ featured.title }}"
+               class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+               onerror="this.style.display='none';" />
+          {% endif %}
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10"></div>
+          
+          <!-- Content Overlay -->
+          <div class="absolute bottom-0 left-0 right-0 p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="article-type-badge-light type-{{ featured.article_type }}">
+                {{ featured.get_article_type_display }}
+              </span>
+              {% if featured.category %}
+              <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-white/20 text-white backdrop-blur-sm">
+                {{ featured.category.name }}
+              </span>
+              {% endif %}
+            </div>
+            
+            <h3 class="text-xl sm:text-2xl font-bold text-white mb-3 leading-tight line-clamp-2">
+              {{ featured.title }}
+            </h3>
+            
+            <p class="text-sm text-white/80 mb-4 line-clamp-2 hidden sm:block">
+              {{ featured.excerpt|default:featured.content|striptags|truncatewords:25 }}
+            </p>
+            
+            <div class="flex items-center gap-3 text-white/70 text-sm">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-white text-xs font-semibold">
+                  {{ featured.author.username|slice:":1"|upper }}
+                </div>
+                <span>{{ featured.author.username }}</span>
+              </div>
+              <span>|</span>
+              <span>{{ featured.published_at|date:"M d, Y" }}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+      
+      <!-- Smaller Featured Cards -->
+      <div class="flex flex-col gap-4">
+        {% for featured in featured_articles|slice:"1:3" %}
+        <div class="featured-card-small group relative rounded-xl overflow-hidden flex" style="background-color: var(--card-bg); border: 1px solid var(--card-border);">
+          <a href="{% url 'article_detail' featured.slug %}" class="flex w-full" hx-boost="false">
+            <div class="w-1/3 aspect-square overflow-hidden relative" style="background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--card-border) 100%); min-width: 120px;">
+              {% if featured.featured_image %}
+              <img src="{{ featured.featured_image.url }}" 
+                   alt="{{ featured.title }}"
+                   class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                   onerror="this.style.display='none';" />
+              {% else %}
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-8 h-8" style="color: var(--text-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              {% endif %}
+            </div>
+            <div class="flex-1 p-4 flex flex-col justify-center">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="article-type-badge type-{{ featured.article_type }}" style="font-size: 0.65rem; padding: 0.125rem 0.5rem;">
+                  {{ featured.get_article_type_display }}
+                </span>
+              </div>
+              <h3 class="font-semibold mb-2 line-clamp-2" style="color: var(--text-primary);">
+                {{ featured.title }}
+              </h3>
+              <div class="text-xs" style="color: var(--text-muted);">
+                {{ featured.published_at|date:"M d, Y" }} | {{ featured.reading_time }} min
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Latest Section Header -->
+  <div class="flex items-center gap-4" data-aos="fade-up">
+    <h2 class="text-xl font-bold" style="color: var(--text-primary);">
+      {% if search_query %}Search Results{% elif current_type %}{{ current_type|title }}s{% elif current_category %}{{ current_category|title }}{% else %}Latest Stories{% endif %}
+    </h2>
+    <div class="flex-1 h-px" style="background-color: var(--card-border);"></div>
+    <span class="text-sm font-medium px-3 py-1 rounded-full" style="background-color: var(--bg-tertiary); color: var(--text-muted);">
+      {{ articles.paginator.count }} article{{ articles.paginator.count|pluralize }}
+    </span>
+  </div>
+
+  <!-- Articles Grid -->
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+    {% for article in articles %}
+    {% include 'articles/partials/article_card.html' with article=article delay=forloop.counter0 %}
+    {% empty %}
+    <div class="sm:col-span-2 lg:col-span-3">
+      <div class="text-center py-20">
+        <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style="background-color: var(--bg-tertiary);">
+          <svg class="w-10 h-10" style="color: var(--text-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold mb-2" style="color: var(--text-primary);">
+          {% if search_query %}No articles found{% else %}No Stories Yet{% endif %}
+        </h3>
+        <p class="text-sm mb-6 max-w-md mx-auto" style="color: var(--text-muted);">
+          {% if search_query %}
+          We couldn't find any articles matching "{{ search_query }}". Try a different search term.
+          {% else %}
+          Check back soon for the latest community updates and stories!
+          {% endif %}
+        </p>
+        {% if search_query %}
+        <a href="{% url 'article_list' %}" class="btn btn-primary text-sm px-6 py-2.5 rounded-full">
+          View All Stories
+        </a>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Pagination -->
+  {% if articles.has_other_pages %}
+  <nav class="flex items-center justify-center gap-2 pt-8" data-aos="fade-up">
+    {% if articles.has_previous %}
+    <a href="?{% if current_category %}category={{ current_category }}&{% endif %}{% if current_type %}type={{ current_type }}&{% endif %}{% if current_tag %}tag={{ current_tag }}&{% endif %}{% if search_query %}q={{ search_query }}&{% endif %}page={{ articles.previous_page_number }}" 
+       class="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all"
+       style="color: var(--text-secondary); background-color: var(--bg-tertiary);">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+      <span class="hidden sm:inline">Previous</span>
+    </a>
+    {% endif %}
+    
+    <div class="flex items-center gap-1">
+      {% for num in articles.paginator.page_range %}
+        {% if articles.number == num %}
+        <span class="w-10 h-10 flex items-center justify-center rounded-full text-sm font-semibold" 
+              style="background-color: var(--text-primary); color: var(--bg-primary);">
+          {{ num }}
+        </span>
+        {% elif num > articles.number|add:'-3' and num < articles.number|add:'3' %}
+        <a href="?{% if current_category %}category={{ current_category }}&{% endif %}{% if current_type %}type={{ current_type }}&{% endif %}{% if current_tag %}tag={{ current_tag }}&{% endif %}{% if search_query %}q={{ search_query }}&{% endif %}page={{ num }}" 
+           class="w-10 h-10 flex items-center justify-center rounded-full text-sm font-medium transition-colors"
+           style="color: var(--text-secondary);">
+          {{ num }}
+        </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+    
+    {% if articles.has_next %}
+    <a href="?{% if current_category %}category={{ current_category }}&{% endif %}{% if current_type %}type={{ current_type }}&{% endif %}{% if current_tag %}tag={{ current_tag }}&{% endif %}{% if search_query %}q={{ search_query }}&{% endif %}page={{ articles.next_page_number }}" 
+       class="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all"
+       style="color: var(--text-secondary); background-color: var(--bg-tertiary);">
+      <span class="hidden sm:inline">Next</span>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </a>
+    {% endif %}
+  </nav>
+  {% endif %}
+</div>
+
+<script>
+// Close search dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  const dropdown = document.getElementById('search-dropdown');
+  const searchInput = document.querySelector('input[name="q"]');
+  if (dropdown && !dropdown.contains(e.target) && e.target !== searchInput) {
+    dropdown.innerHTML = '';
+  }
+});
+</script>
+{% endblock %}
